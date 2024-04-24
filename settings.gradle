@@ -1,0 +1,3 @@
+rootProject.name = 'demo'
+include 'modulith_batch'
+include 'modulith_api'
