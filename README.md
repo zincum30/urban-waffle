@@ -19,7 +19,6 @@
 
 ## Description
 
-<br/>
 
 **Quirky, Experimental, Inefficient, and SUPER Personal**
 
