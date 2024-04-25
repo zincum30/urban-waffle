@@ -24,7 +24,9 @@
 
 
 
-This project is about some unconventional attempts I want to try in an unstructured manner.
+This project is about some unconventional attempts I want to try in an unstructured manner.  
+You can find various libraries such as Spring Security, Spring Data JPA, Querydsl, JWT, Spring Batch, or Spring Modulith, and more. And you might also find some poor patterns or architectures.
+
 
 ---
 
