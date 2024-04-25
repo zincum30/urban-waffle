@@ -23,6 +23,9 @@
 **Quirky, Experimental, Inefficient, and SUPER Personal**
 
 
+
+This project is about some unconventional attempts I want to try in an unstructured manner.
+
 ---
 
 
