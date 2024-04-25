@@ -1,3 +1,5 @@
-rootProject.name = 'demo'
+rootProject.name = 'urban-waffle'
 include 'modulith_batch'
 include 'modulith_api'
+
+

@@ -1,36 +1,82 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.5'
-	id 'io.spring.dependency-management' version '1.1.4'
-}
-
-allprojects {
-	group = 'com.modulith'
-	version = '0.0.1-SNAPSHOT'
-	sourceCompatibility = '17'
+buildscript {
+	ext {
+		springBootVersion = '3.2.1'
+	}
 
 	repositories {
 		mavenCentral()
 	}
 
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "io.spring.gradle:dependency-management-plugin:1.1.4"
+	}
+
 }
 
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+allprojects {
+	group = 'com.module'
+	version = '0.0.1-SNAPSHOT'
 }
 
 
 subprojects {
+
 	apply plugin: 'java'
+	apply plugin: 'java-library'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 
+	sourceCompatibility = '17'
+
+	repositories {
+		google()
+		gradlePluginPortal()
+		maven {
+			url "https://www.jitpack.io"
+		}
+		maven {
+			url 'https://maven.google.com/'
+		}
+		mavenCentral()
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+
+//	dependencyManagement {
+//		imports {
+//			mavenBom "org.springframework.boot:spring-boot-dependencies:'1.1.4'"
+//		}
+//	}
+
+	compileJava {
+		options.annotationProcessorPath = configurations.annotationProcessor
+		options.compilerArgs << '-parameters'
+	}
+
 	dependencies {
-		compileOnly 'org.projectlombok:lombok'
-		annotationProcessor 'org.projectlombok:lombok'
+		implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+		implementation 'io.lettuce:lettuce-core:6.2.1.RELEASE'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+		compileOnly 'org.projectlombok:lombok:1.18.22'
+
+		annotationProcessor 'org.projectlombok:lombok:1.18.22'
+		annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+		annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+		testCompileOnly 'org.projectlombok:lombok:1.18.22'
+		testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+	}
+
+	test {
+		useJUnitPlatform()
 	}
 
 	tasks.named('bootJar') {
@@ -41,7 +87,6 @@ subprojects {
 		enabled = true
 	}
 
-	tasks.named('test') {
-		useJUnitPlatform()
-	}
+
 }
+
