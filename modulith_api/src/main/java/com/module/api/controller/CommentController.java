@@ -47,18 +47,18 @@ public class CommentController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PutMapping("comments/{comment-id}")
-    public ResponseEntity<HttpStatus> updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
-        Long userId = (Long) authentication.getPrincipal();
-        commentService.updateComment(commentId, userId, detail);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-    @PostMapping("/{comment-id}")
-    public ResponseEntity<String> deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
-        Long userId = (Long) authentication.getPrincipal();
-        commentService.deleteComment(commentId, userId);
-        return ResponseEntity.ok().body("DELETED");
-    }
+//    @PutMapping("comments/{comment-id}")
+//    public ResponseEntity<HttpStatus> updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
+//        Long userId = (Long) authentication.getPrincipal();
+//        commentService.updateComment(commentId, userId, detail);
+//        return ResponseEntity.ok(HttpStatus.OK);
+//    }
+//
+//    @PostMapping("/{comment-id}")
+//    public ResponseEntity<String> deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
+//        Long userId = (Long) authentication.getPrincipal();
+//        commentService.deleteComment(commentId, userId);
+//        return ResponseEntity.ok().body("DELETED");
+//    }
 
 }

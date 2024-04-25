@@ -1,17 +1,15 @@
 package com.module.api.repository.comment;
 
 import com.module.api.dto.response.FetchCommentListResponse;
-import com.homework.jinsimver.entity.comment.QCommentEntity;
-import com.homework.jinsimver.entity.post.QPostMetaEntity;
-import com.homework.jinsimver.entity.user.QUserEntity;
+import com.module.api.entity.comment.QCommentEntity;
+import com.module.api.entity.post.QPostMetaEntity;
+import com.module.api.entity.user.QUserEntity;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-
-import static com.querydsl.core.group.GroupBy.groupBy;
 
 
 @RequiredArgsConstructor

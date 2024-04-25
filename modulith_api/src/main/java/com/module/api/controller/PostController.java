@@ -1,6 +1,5 @@
 package com.module.api.controller;
 
-import com.homework.jinsimver.annotation.swagger.SaveDraft;
 import com.module.api.annotation.JwtRequired;
 import com.module.api.dto.request.CreatePostContentDto;
 import com.module.api.dto.response.FetchPostContentResponse;
