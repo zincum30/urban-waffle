@@ -1,0 +1,69 @@
+spring:
+  datasource:
+    main:
+      hikari:
+        auto-commit: false
+        jdbc-url: jdbc:mysql://localhost:3306/main
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+    dormant:
+      hikari:
+        jdbc-url: jdbc:mysql://localhost:3306/dormant
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+  batch:
+    jdbc:
+      url: jdbc:mysql://localhost:3306/batch?rewriteBatchedStatements=true
+      #  initialize-schema: always
+      table-prefix: batch.batch_
+    job:
+      enabled: false
+
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: none
+        format_sql: true
+        use-new-id-generator-mappings: false
+        # generate_statistics: true
+        jdbc.batch_size: 2000
+        order_inserts: true
+        order_updates: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  #repositories:
+  #  bootstrap-mode: default
+
+
+
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    groups-order: ASC
+    tags-sorter: alpha
+    operationsSorter: alpha
+    disable-swagger-default-url: true
+    display-request-duration: true
+  api-docs:
+    path: /api-docs
+    groups:
+      enabled: true
+  show-actuator: true
+  override-with-generic-response: false
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+logging:
+  level:
+    org.hibernate:
+      SQL: debug
+      type: trace
+
