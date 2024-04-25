@@ -1,43 +1,15 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.2.5'
-    id 'io.spring.dependency-management' version '1.1.4'
-}
-
-group = 'com.homework'
-version = '0.0.1-SNAPSHOT'
-
-java {
-    sourceCompatibility = '17'
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-compileJava {
-    options.compilerArgs << '-parameters'
-}
-
-
-repositories {
-    mavenCentral()
-}
-
 
 dependencies {
     implementation 'org.springframework.security:spring-security-crypto'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
-    implementation 'org.springframework.boot:spring-boot-starter-batch'
+//    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+//    implementation 'org.springframework.boot:spring-boot-starter-batch'
     // implementation 'org.springframework.boot:soring-boot-starter-quartz'
     implementation 'com.networknt:json-schema-validator:1.0.87'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -47,10 +19,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'io.lettuce:lettuce-core:6.2.1.RELEASE'
 
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'io.lettuce:lettuce-core'
+
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
-
 
     // compileOnly 'org.projectlombok:lombok'
     // developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -61,6 +37,19 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
     // annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+
+    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+//     compileOnly 'org.projectlombok:lombok'
+//     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//
+//
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+//
+//    annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -75,17 +64,17 @@ tasks.named('test') {
 
 
 //QueryDsl 설정부
-def generated = 'src/main/generated'
-
-clean {
-    delete file(generated)
-}
-
-
-tasks.named('bootJar'){
-    enabled = true
-}
-
-tasks.named('jar'){
-    enabled = false
-}
+//def generated = 'src/main/generated'
+//
+//clean {
+//    delete file(generated)
+//}
+//
+//
+//tasks.named('bootJar'){
+//    enabled = true
+//}
+//
+//tasks.named('jar'){
+//    enabled = false
+//}
