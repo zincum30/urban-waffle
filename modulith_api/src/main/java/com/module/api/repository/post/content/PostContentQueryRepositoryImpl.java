@@ -1,9 +1,10 @@
 package com.module.api.repository.post.content;
 
 import com.module.api.dto.response.FetchPostContentResponse;
-import com.homework.jinsimver.entity.post.QPostContentEntity;
-import com.homework.jinsimver.entity.post.QPostMetaEntity;
-import com.homework.jinsimver.entity.user.QUserEntity;
+
+import com.module.api.entity.post.QPostContentEntity;
+import com.module.api.entity.post.QPostMetaEntity;
+import com.module.api.entity.user.QUserEntity;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

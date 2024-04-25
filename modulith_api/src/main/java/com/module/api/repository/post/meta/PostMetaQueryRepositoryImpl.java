@@ -1,9 +1,10 @@
 package com.module.api.repository.post.meta;
 
 import com.module.api.dto.response.FetchPostListResponse;
-import com.homework.jinsimver.entity.post.QPostImageEntity;
-import com.homework.jinsimver.entity.post.QPostMetaEntity;
-import com.homework.jinsimver.entity.user.QUserEntity;
+
+import com.module.api.entity.post.QPostImageEntity;
+import com.module.api.entity.post.QPostMetaEntity;
+import com.module.api.entity.user.QUserEntity;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
