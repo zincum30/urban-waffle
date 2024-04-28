@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "post_content")
-public class PostContentEntity extends BaseTimeEntity {
+public class PostContentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,7 +8,10 @@ import com.module.api.exception.CustomException;
 import com.module.api.repository.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +22,8 @@ public class CommentService {
 
     // TODO : 뭐가 문제냙!!!!!!!!!!!
 
-    public FetchCommentListResponse fetchCommentList(Long postId, int page, int limit) {
-        return (FetchCommentListResponse) commentRepository.fetchCommentList(postId, PageRequest.of(page, limit));
+    public List<FetchCommentListResponse> fetchCommentList(Long postId, Pageable pageable) {
+        return commentRepository.fetchCommentList(postId, pageable);
     }
 
     public void addComment(Long postId, Long userId, String detail) {
@@ -65,7 +68,7 @@ public class CommentService {
         if (!commentEntity.getUserId().equals(userId)) {
             throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
         }
-        commentEntity.builder()
+        commentEntity = CommentEntity.builder()
                 .commentId(commentId)
                 .postId(commentEntity.getPostId())
                 .parentId(commentEntity.getParentId())

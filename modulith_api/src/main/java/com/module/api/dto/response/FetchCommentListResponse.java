@@ -9,12 +9,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FetchCommentListResponse {
 
     private String nickname;
     private String detail;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+    private List<FetchCommentListResponse> replies;
 
 }

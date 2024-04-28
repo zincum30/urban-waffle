@@ -33,6 +33,12 @@ public class UserService {
         return userRepository.save(userEntity).getUserId();
     }
 
+    public Boolean isDormant(Long userId) {
+        UserEntity userEntity = userRepository.getById(userId);
+        return userEntity.getLastLoginDate() == LocalDateTime.now().minusMonths(1);
+    }
+
+
     @Transactional
     public void updateLastLoginDate(Long userId) {
         UserEntity userEntity = userRepository.getById(userId);
@@ -40,8 +46,6 @@ public class UserService {
         userRepository.save(userEntity);
     }
 
-    public void logout() {
-    }
 
 
     @Transactional
@@ -59,17 +63,19 @@ public class UserService {
     }
 
 
-//    public List<UserEntity> getInactiveUserList() {
-//        List<UserEntity> inactiveUserEntities = userRepository.findInactiveUsers(null);
-//        return inactiveUserEntities.stream()
-//                .map(map -> new UserEntity())
-//                .collect(Collectors.toList());
-//    }
-
-
     public Long findUserIdByNickname(String nickname) {
-        UserEntity userEntity = userRepository.findByNickname(nickname).orElseThrow();
+        UserEntity userEntity = userRepository.findByNickname(nickname).orElseThrow(
+                () -> new CustomException(CustomErrorCode.USER_NOT_FOUND));
         return userEntity.getUserId();
+    }
+
+    public String findProfileImgPath(Long userId) {
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow();
+        return userEntity.getProfileImagePath();
+    }
+
+    public void withdrawUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 
 

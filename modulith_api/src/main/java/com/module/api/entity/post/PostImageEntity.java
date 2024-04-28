@@ -27,8 +27,8 @@ public class PostImageEntity {
     @Column(name = "post_id")
     private Long postId;
 
-    @Column(name = "img_Url")
-    private String imgUrl;
+    @Column(name = "post_img_path")
+    private String postImgPath;
 
 
 }
