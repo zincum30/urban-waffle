@@ -38,9 +38,8 @@ public class UserAuthEntity {
         this.updatedDate = updatedDate;
     }
 
-
-    public void updatePassword(String password) {
-        this.password = password;
+    public boolean match(String password) {
+        return this.password.equals(password);
     }
 
 }

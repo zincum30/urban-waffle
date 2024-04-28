@@ -6,6 +6,7 @@ import com.module.api.dto.response.FetchPostContentResponse;
 import com.module.api.dto.response.FetchPostListResponse;
 import com.module.api.service.post.PostContentService;
 import com.module.api.service.post.PostImageService;
+
 import com.module.api.service.post.PostMetaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 
 @JwtRequired
 @RestController
@@ -34,6 +37,7 @@ public class PostController {
     private final PostMetaService postMetaService;
     private final PostImageService postImageService;
     private final PostContentService postContentService;
+
 
 
     @PostMapping("/draft")
@@ -49,9 +53,8 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<FetchPostListResponse> fetchPostList(PageRequest pageRequest) {
-        FetchPostListResponse postList = postMetaService.fetchPostsList(pageRequest);
-        return ResponseEntity.ok().body(postList);
+    public ResponseEntity<List<FetchPostListResponse>> fetchPostList() {
+        return ResponseEntity.ok(postMetaService.fetchPostsList(null));
     }
 
     @GetMapping("/{post-id}")
@@ -83,11 +86,11 @@ public class PostController {
         return ResponseEntity.ok().body("DELETED");
     }
 
-    @DeleteMapping("/{post-id}")
-    public ResponseEntity<String> deletePost(@PathVariable(name = "post-id") Long postId, Authentication authentication) {
-        Long userId = (Long) authentication.getPrincipal();
-        postMetaService.deletePost(postId, userId);
-        return ResponseEntity.ok().body("DELETED");
-    }
+//    @DeleteMapping("/{post-id}")
+//    public ResponseEntity<String> deletePost(@PathVariable(name = "post-id") Long postId, Authentication authentication) {
+//        Long userId = (Long) authentication.getPrincipal();
+//        postMetaService.deletePost(postId, userId);
+//        return ResponseEntity.ok().body("DELETED");
+//    }
 
 }

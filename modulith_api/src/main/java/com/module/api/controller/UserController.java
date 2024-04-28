@@ -6,6 +6,8 @@ import com.module.api.dto.request.UpdateNicknameDto;
 import com.module.api.dto.request.ProfileImageRequest;
 import com.module.api.dto.request.UpdatePassworDto;
 import com.module.api.dto.response.LoginResponse;
+import com.module.api.service.facade.FindUserProfileFacade;
+import com.module.api.service.facade.WithdrawUserAccountFacade;
 import com.module.api.service.user.UserAuthService;
 import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,6 +36,8 @@ public class UserController {
     private final UserDetailService userDetailService;
     private final UserService userService;
     private final UserAuthService userAuthService;
+    private final WithdrawUserAccountFacade withdrawUserAccountFacade;
+    private final FindUserProfileFacade findUserProfileFacade;
 
     @PostMapping("/register")
     public ResponseEntity<HttpStatus> register(@RequestBody CreateUserDto createUserDto) {
@@ -84,10 +89,18 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    public void findUserProfile(Authentication authentication) {
-        Long userId = (Long) authentication.getPrincipal();
+    public void findUserProfile(String nickname) {
+
+        findUserProfileFacade.userProfileResponse(nickname);
+
     }
 
 
+    @DeleteMapping ("/withdraw")
+    public ResponseEntity<HttpStatus> withdrawUserAccount(Authentication authentication) {
+        Long userId = (Long) authentication.getPrincipal();
+        withdrawUserAccountFacade.withdrawUserAccount(userId);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
 }

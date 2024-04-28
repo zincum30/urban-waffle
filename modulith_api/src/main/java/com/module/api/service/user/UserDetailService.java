@@ -1,5 +1,6 @@
 package com.module.api.service.user;
 
+import com.module.api.dto.response.UserProfileResponse;
 import com.module.api.entity.user.UserDetailEntity;
 import com.module.api.exception.CustomErrorCode;
 import com.module.api.exception.CustomException;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.font.LayoutPath;
 import java.time.LocalDateTime;
 
 @Service
@@ -39,11 +41,23 @@ public class UserDetailService {
 
     // TODO : email에 해당하는 정보가 없는 경우 exception이 나는지? null이 return 되는지? 확인이 필요하겠구뇽~
     public void checkDuplicatedEmail(String email) {
-        if (userDetailRepository.findByEmail(email) != null) {
+        if (userDetailRepository.findByEmail(email).isEmpty()) {
             throw new CustomException(CustomErrorCode.CONFLICT_EMAIL);
         }
     }
 
+    public boolean existsByUserId(Long userId) {
+        return userDetailRepository.existsById(userId);
+    }
+
+    public void withdrawUserDetail(Long userId) {
+        userDetailRepository.deleteById(userId);
+    }
+
+    public String findEmailByUserId(Long userId) {
+        UserDetailEntity userDetailEntity = userDetailRepository.findByUserId(userId).orElseThrow();
+        return userDetailEntity.getEmail();
+    }
 
 
 }

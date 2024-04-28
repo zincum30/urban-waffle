@@ -46,4 +46,8 @@ public class UserAuthService {
         userAuthRepository.save(userAuthEntity);
     }
 
+
+    public void withdrawUserAuth(Long userId) {
+        userAuthRepository.deleteById(userId);
+    }
 }

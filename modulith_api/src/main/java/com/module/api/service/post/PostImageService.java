@@ -32,7 +32,7 @@ public class PostImageService {
 
         PostImageEntity imageEntity = PostImageEntity.builder()
                 .postId(postId)
-                .imgUrl(absolutePath)
+                .postImgPath(absolutePath)
                 .build();
 
         imageRepository.save(imageEntity);
@@ -59,8 +59,8 @@ public class PostImageService {
     // TODO : 이미지 이름을 넘겨줄 필요가 있나...생각중/ 그냥 url을 넘겨도??
     public void deleteImage(Long postId, String imageName) {
         PostImageEntity postImageEntity = imageRepository.getByPostId(postId);
-        String imageUrl = postImageEntity.getImgUrl();
-        String getImageName = postImageEntity.getImgUrl().substring(imageUrl.lastIndexOf("_")+1);
+        String imageUrl = postImageEntity.getPostImgPath();
+        String getImageName = postImageEntity.getPostImgPath().substring(imageUrl.lastIndexOf("_")+1);
         if(!getImageName.equals(imageName)) {
             throw new CustomException(CustomErrorCode.BAD_REQUEST);
         }

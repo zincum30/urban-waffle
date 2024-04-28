@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
+
 
 @Getter
 @Entity
@@ -22,7 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class CommentEntity extends BaseTimeEntity {
+public class CommentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +45,13 @@ public class CommentEntity extends BaseTimeEntity {
 
     @Column(name = "`delete`")
     private boolean delete;
+
+    @Column(name =  "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "modified_date")
+    private LocalDateTime modifiedDate;
+
 
 //    @Builder
 //    public CommentEntity(Long postId, Long userId, Long parentId, String detail, boolean delete) {

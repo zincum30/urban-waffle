@@ -23,12 +23,12 @@ public class PostContentQueryRepositoryImpl implements PostContentQueryRepositor
         return jpaQueryFactory.select(Projections.fields(FetchPostContentResponse.class,
                 userEntity.nickname,
                 postContentEntity.content,
-                postContentEntity.createdDate,
-                postContentEntity.modifiedDate))
+                postMetaEntity.createdDate,
+                postMetaEntity.modifiedDate))
                 .from(postMetaEntity)
                 .innerJoin(userEntity).on(postMetaEntity.userId.eq(userEntity.userId))
                 .join(postContentEntity).on(postMetaEntity.postId.eq(postContentEntity.postId))
-                .orderBy(postContentEntity.createdDate.asc())
+                .orderBy(postMetaEntity.createdDate.asc())
                 .fetchOne();
 
     }
