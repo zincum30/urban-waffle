@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -26,6 +27,8 @@ public class PostMetaService {
     public Long createMetaPost(Long userId) {
         PostMetaEntity postMetaEntity = PostMetaEntity.builder()
                 .userId(userId)
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .build();
         postMetaRepository.save(postMetaEntity);
         return postMetaEntity.getPostId();
@@ -46,7 +49,7 @@ public class PostMetaService {
         PostMetaEntity postMetaEntity = postMetaRepository.getById(postId);
         if (postMetaEntity.getUserId() == userId) {
             postMetaRepository.delete(postMetaEntity);
-        } else throw new CustomException(CustomErrorCode.BAD_REQUEST);
+        } else throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
     }
 
 }

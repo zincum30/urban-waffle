@@ -10,9 +10,12 @@ import com.module.api.service.SendEmailService;
 import com.module.api.service.user.UserAuthService;
 import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.security.NoSuchAlgorithmException;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +30,7 @@ public class LoginFacade {
 
     // TO DO : 이벤트 처리 알아보기
 
-    public Object signIn(LoginDto loginDto) throws Exception {
+    public LoginResponse signIn(LoginDto loginDto) {
 
         String email = loginDto.getEmail();
         String password = loginDto.getPassword();
@@ -39,17 +42,12 @@ public class LoginFacade {
             throw new CustomException(CustomErrorCode.USER_NOT_FOUND);
         }
 
-        if (userService.isDormant(userId) && userDetailService.existsByUserId(userId)) {
-
+        if (!(userService.isDormant(userId) && userDetailService.existsByUserId(userId))) {
+            sendEmailService.sendEmailForCertification(email);
+            }
             userService.updateLastLoginDate(userId);
             return LoginResponse.builder()
                     .accessToken(jwtProvider.createAccessToken(userId)).build();
-        } else {
 
-            sendEmailService.sendEmailForCertification(email);
-
-            // TO DO : return값 다시
-            return ActivateDormantAccountResponse.class;
-        }
     }
 }

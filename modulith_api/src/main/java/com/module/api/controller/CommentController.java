@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-//@JwtRequired
+@JwtRequired
 @RequiredArgsConstructor
 @RequestMapping("api/v1")
 public class CommentController {
@@ -52,18 +53,18 @@ public class CommentController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-//    @PutMapping("comments/{comment-id}")
-//    public ResponseEntity<HttpStatus> updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
-//        Long userId = (Long) authentication.getPrincipal();
-//        commentService.updateComment(commentId, userId, detail);
-//        return ResponseEntity.ok(HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/{comment-id}")
-//    public ResponseEntity<String> deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
-//        Long userId = (Long) authentication.getPrincipal();
-//        commentService.deleteComment(commentId, userId);
-//        return ResponseEntity.ok().body("DELETED");
-//    }
+    @PutMapping("comments/{comment-id}")
+    public ResponseEntity<HttpStatus> updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
+        Long userId = (Long) authentication.getPrincipal();
+        commentService.updateComment(commentId, userId, detail);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{comment-id}")
+    public ResponseEntity<String> deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
+        Long userId = (Long) authentication.getPrincipal();
+        commentService.deleteComment(commentId, userId);
+        return ResponseEntity.ok().body("DELETED");
+    }
 
 }
