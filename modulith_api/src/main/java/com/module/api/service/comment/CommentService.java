@@ -78,7 +78,7 @@ public class CommentService {
         if (!commentEntity.getUserId().equals(userId)) {
             throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
         }
-        
+
         commentEntity = CommentEntity.builder()
                 .commentId(commentId)
                 .postId(commentEntity.getPostId())

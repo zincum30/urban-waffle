@@ -40,8 +40,9 @@ public class UserDetailService {
 
 
     // TODO : email에 해당하는 정보가 없는 경우 exception이 나는지? null이 return 되는지? 확인이 필요하겠구뇽~
+    // TODO : 확인 완료  ---> CustomException 돌려줌
     public void checkDuplicatedEmail(String email) {
-        if (userDetailRepository.findByEmail(email).isEmpty()) {
+        if (userDetailRepository.findByEmail(email).isPresent()) {
             throw new CustomException(CustomErrorCode.CONFLICT_EMAIL);
         }
     }

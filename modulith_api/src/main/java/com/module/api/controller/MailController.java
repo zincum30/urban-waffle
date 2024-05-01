@@ -8,6 +8,7 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,25 +19,24 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/mails")
+@RequestMapping("/api/v1/mail")
 public class MailController {
 
     private final SendEmailService sendEmailService;
     private final EmailVerifyService verifyService;
 
-    @PostMapping("/send-certification")
-    public ResponseEntity<HttpStatus> sendCertificationNumber(@RequestBody SendEmailDto sendEmailDto)
+    @GetMapping
+    public ResponseEntity<HttpStatus> sendCertificationNumber(@RequestParam("address") String mailAddress)
             throws MessagingException, NoSuchAlgorithmException {
-        sendEmailService.sendEmailForCertification(sendEmailDto.getEmail());
+        sendEmailService.sendEmailForCertification(mailAddress);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/verify")
+    @PostMapping
     public ResponseEntity<HttpStatus> verifyCertificationNumber(
-            @RequestParam(name = "email") String email,
             @RequestBody CheckCertificationNumberDto checkCertificationNumberDto
             ) {
-        verifyService.verifyEmail(email, checkCertificationNumberDto.getCertificationNumber());
+        verifyService.verifyEmail(checkCertificationNumberDto.getMail(), checkCertificationNumberDto.getCertificationNumber());
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 

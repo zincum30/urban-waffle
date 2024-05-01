@@ -42,22 +42,22 @@ public class UserController {
     private final WithdrawUserAccountFacade withdrawUserAccountFacade;
     private final FindUserProfileFacade findUserProfileFacade;
 
-    @PostMapping("/register")
+    @PostMapping
     public ResponseEntity<HttpStatus> register(@RequestBody CreateUserDto createUserDto) {
         registerFacade.register(createUserDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/check-email")
-    public ResponseEntity<HttpStatus> checkDuplicatedEmail(@RequestParam String email) {
+    @GetMapping("/mail")
+    public ResponseEntity<String> checkDuplicatedEmail(@RequestParam("mail") String email) {
         userDetailService.checkDuplicatedEmail(email);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok("AVAILABLE_MAIL_ADDRESS");
     }
 
-    @GetMapping("/check-nickname")
-    public ResponseEntity<HttpStatus> checkDuplicatedNickname(@RequestParam String nickname) {
+    @GetMapping("/nickname")
+    public ResponseEntity<String> checkDuplicatedNickname(@RequestParam("nickname") String nickname) {
         userService.checkDuplicatedNickname(nickname);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok("AVAILABLE_NICKNAME");
     }
 
 
@@ -67,7 +67,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/image")
+    @PutMapping("/me/img")
     public ResponseEntity<HttpStatus> updateProfileImg(
             @RequestBody ProfileImageRequest profileImageRequest, Authentication authentication
     ) {
@@ -76,21 +76,21 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PutMapping("/nickname") // TODO : update-nickname이 나을지, nickname이 나을지?
+    @PutMapping("/me/nickname") // TODO : update-nickname이 나을지, nickname이 나을지?
     public ResponseEntity<HttpStatus> updateNickname(UpdateNicknameDto nickname, Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
         userService.updateNickname(nickname, userId);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/password") // TODO : 이러면 어떤 유저의 패스워드 수정인지 어케 앎????
+    @PostMapping("/me/password") // TODO : 이러면 어떤 유저의 패스워드 수정인지 어케 앎????
     public ResponseEntity<HttpStatus> updatePassword(UpdatePassworDto passworDto) {
         userAuthService.updatePassword(passworDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
-    @GetMapping("/profile")
+    @GetMapping("/me")
     public void findUserProfile(String nickname) {
 
         findUserProfileFacade.userProfileResponse(nickname);

@@ -25,20 +25,20 @@ import java.util.List;
 @RestController
 @JwtRequired
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/posts")
 public class CommentController {
 
     private final CommentService commentService;
     private final CreateCommentFacade createCommentFacade;
 
-    @GetMapping("/{postId}/comments")
-    public ResponseEntity<List<FetchCommentListResponse>> fetchCommentsList(@PathVariable(name = "postId")Long postId, Pageable pageable) {
+    @GetMapping("/{post-id}/comments")
+    public ResponseEntity<List<FetchCommentListResponse>> fetchCommentsList(@PathVariable(name = "post-id")Long postId, Pageable pageable) {
         return ResponseEntity.ok(commentService.fetchCommentList(postId,pageable));
 
     }
 
 
-    @PostMapping("/posts/{post-id}/comment")
+    @PostMapping("/{post-id}/comments")
     public ResponseEntity<HttpStatus> postComment(@PathVariable(name = "post-id") Long postId, @RequestBody PostCommentRequest commentRequest) {
         createCommentFacade.createComment(postId, commentRequest);
         return ResponseEntity.ok(HttpStatus.OK);
@@ -46,7 +46,7 @@ public class CommentController {
 
 
     // TODO : 근데 프론트에서 코멘트 아이디를 알 수가,,,있나..?
-    @PostMapping("posts/{post-id}/comments/{comment-id}")
+    @PostMapping("{post-id}/comments/{comment-id}")
     public ResponseEntity<HttpStatus> postReply(@PathVariable(name ="post-id") Long postId, @PathVariable(name = "comment-id") Long commentId, Authentication authentication, @RequestBody CreateCommentDto createCommentDto) {
         Long userId = (Long) authentication.getPrincipal();
         commentService.addReply(postId, commentId, userId, createCommentDto);
