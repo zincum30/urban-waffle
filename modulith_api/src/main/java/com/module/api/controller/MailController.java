@@ -25,19 +25,18 @@ public class MailController {
     private final SendEmailService sendEmailService;
     private final EmailVerifyService verifyService;
 
-    @GetMapping
-    public ResponseEntity<HttpStatus> sendCertificationNumber(@RequestParam("address") String mailAddress)
+    @GetMapping("/send")
+    public void sendCertificationNumber(@RequestParam("address") String mailAddress)
             throws MessagingException, NoSuchAlgorithmException {
         sendEmailService.sendEmailForCertification(mailAddress);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+
     }
 
-    @PostMapping
-    public ResponseEntity<HttpStatus> verifyCertificationNumber(
-            @RequestBody CheckCertificationNumberDto checkCertificationNumberDto
+    @GetMapping("/verify")
+    public void verifyCertificationNumber(
+            @RequestParam("number") CheckCertificationNumberDto checkCertificationNumberDto
             ) {
         verifyService.verifyEmail(checkCertificationNumberDto.getMail(), checkCertificationNumberDto.getCertificationNumber());
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
 }
