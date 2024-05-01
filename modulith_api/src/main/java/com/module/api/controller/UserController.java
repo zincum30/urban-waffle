@@ -13,6 +13,7 @@ import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
 import com.module.api.service.facade.LoginFacade;
 import com.module.api.service.facade.RegisterFacade;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,7 +67,6 @@ public class UserController {
     }
 
 
-
     @PutMapping("/image")
     public ResponseEntity<HttpStatus> updateProfileImg(
             @RequestBody ProfileImageRequest profileImageRequest, Authentication authentication
@@ -74,7 +76,7 @@ public class UserController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PutMapping("/nickname") // TODO : update-nickname이 나을지, update-nickname이 나을지--RESTful
+    @PutMapping("/nickname") // TODO : update-nickname이 나을지, nickname이 나을지?
     public ResponseEntity<HttpStatus> updateNickname(UpdateNicknameDto nickname, Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
         userService.updateNickname(nickname, userId);

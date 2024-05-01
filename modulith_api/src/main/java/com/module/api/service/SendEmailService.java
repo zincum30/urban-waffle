@@ -27,13 +27,16 @@ public class SendEmailService {
     private final CertificationNumberGenerator generator;
 
 
+    public void sendEmailForCertification(String email) {
 
-    public void sendEmailForCertification(String email) throws NoSuchAlgorithmException, MessagingException {
-
-        String certificationNumber = generator.createCertificationNumber();
-        String content = "인증번호 : " + certificationNumber.toString();
-        certificationRedisTemplate.saveCertificationNumber(email,certificationNumber);
-        sendEmail(email,content);
+        try {
+            String certificationNumber = generator.createCertificationNumber();
+            String content = "인증번호 : " + certificationNumber;
+            certificationRedisTemplate.saveCertificationNumber(email, certificationNumber);
+            sendEmail(email, content);
+        } catch (NoSuchAlgorithmException | MessagingException e) {
+            e.getMessage();
+        }
     }
 
     private void sendEmail(String email, String content) throws MessagingException {
@@ -45,8 +48,6 @@ public class SendEmailService {
         helper.setText(content);
         mailSender.send(mimeMessage);
     }
-
-
 
 
 }

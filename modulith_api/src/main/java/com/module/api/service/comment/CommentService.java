@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,8 +20,6 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-
-    // TODO : 뭐가 문제냙!!!!!!!!!!!
 
     public List<FetchCommentListResponse> fetchCommentList(Long postId, Pageable pageable) {
         return commentRepository.fetchCommentList(postId, pageable);
@@ -34,6 +33,8 @@ public class CommentService {
                 .parentId(0L)
                 .detail(detail)
                 .delete(false)
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .build();
         commentRepository.save(commentEntity);
     }
@@ -45,6 +46,8 @@ public class CommentService {
                 .userId(userId)
                 .detail(createCommentDto.getDetail())
                 .delete(false)
+                .createdDate(LocalDateTime.now())
+                .modifiedDate(LocalDateTime.now())
                 .build();
         commentRepository.save(commentEntity);
     }
@@ -55,8 +58,13 @@ public class CommentService {
             commentEntity.updateDetail(detail);
         } else throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
 
-        commentEntity.builder()
+        commentEntity = CommentEntity.builder()
+                .commentId(commentId)
                 .detail(detail)
+                .userId(userId)
+                .parentId(commentEntity.getParentId())
+                .createdDate(commentEntity.getCreatedDate())
+                .modifiedDate(LocalDateTime.now())
                 .build();
         commentRepository.save(commentEntity);
 
@@ -64,10 +72,13 @@ public class CommentService {
 
 
     public void deleteComment(Long commentId, Long userId) {
-        CommentEntity commentEntity = commentRepository.getById(commentId);
+        CommentEntity commentEntity = commentRepository.findById(commentId)
+                .orElseThrow();
+
         if (!commentEntity.getUserId().equals(userId)) {
             throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
         }
+        
         commentEntity = CommentEntity.builder()
                 .commentId(commentId)
                 .postId(commentEntity.getPostId())

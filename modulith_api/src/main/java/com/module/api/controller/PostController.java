@@ -86,11 +86,11 @@ public class PostController {
         return ResponseEntity.ok().body("DELETED");
     }
 
-//    @DeleteMapping("/{post-id}")
-//    public ResponseEntity<String> deletePost(@PathVariable(name = "post-id") Long postId, Authentication authentication) {
-//        Long userId = (Long) authentication.getPrincipal();
-//        postMetaService.deletePost(postId, userId);
-//        return ResponseEntity.ok().body("DELETED");
-//    }
+    @DeleteMapping("/{post-id}")
+    public ResponseEntity<String> deletePost(@PathVariable(name = "post-id") Long postId, Authentication authentication) {
+        Long userId = (Long) authentication.getPrincipal();
+        postMetaService.deletePost(postId, userId);
+        return ResponseEntity.ok().body("DELETED");
+    }
 
 }
