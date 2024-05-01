@@ -39,7 +39,6 @@ public class PostController {
     private final PostContentService postContentService;
 
 
-
     @PostMapping("/draft")
     public ResponseEntity<Long> addTempPost(Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
@@ -65,10 +64,9 @@ public class PostController {
 
 
     @PostMapping("/{post-id}")
-    public ResponseEntity<HttpStatus> createPostContent(@PathVariable(name = "post-id") Long postId, @RequestBody CreatePostContentDto createPostContentDto) {
+    public void createPostContent(@PathVariable(name = "post-id") Long postId, @RequestBody CreatePostContentDto createPostContentDto) {
 
         postContentService.savePostContent(postId, createPostContentDto);
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
@@ -81,16 +79,15 @@ public class PostController {
 
     // TODO : 인자값으로 뭘 넘겨야 하나...
     @DeleteMapping("/{post-id}/img")
-    public ResponseEntity<String> deleteImage(@PathVariable(name = "post-id")Long postId, String imageName) {
+    public void deleteImage(@PathVariable(name = "post-id") Long postId, @RequestParam("name") String imageName) {
         postImageService.deleteImage(postId, imageName);
-        return ResponseEntity.ok().body("DELETED");
+
     }
 
     @DeleteMapping("/{post-id}")
-    public ResponseEntity<String> deletePost(@PathVariable(name = "post-id") Long postId, Authentication authentication) {
+    public void deletePost(@PathVariable(name = "post-id") Long postId, Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
         postMetaService.deletePost(postId, userId);
-        return ResponseEntity.ok().body("DELETED");
     }
 
 }

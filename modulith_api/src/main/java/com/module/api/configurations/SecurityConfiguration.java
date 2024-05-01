@@ -41,20 +41,6 @@ public class SecurityConfiguration {
                 );
 
 
-        // TODO : 로그아웃 기능 구현의 흔적,,
-//                .logout(httpSecurityLogoutConfigurer ->
-//                        .logoutUrl("LOGOUT_URL")
-//                        .logoutSuccessUrl("LOGOUT_SUCCES_URL")
-//                        .invalidateHttpSession(true)
-//                        .deleteCookies("JESSIONID")
-//                        .permitAll());
-
-        // TODO : tokenValiditySeconds 값은 어떻게 할지...?
-//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-//                .rememberMe()
-//                .tokenValiditySeconds(60 * 60)
-//                .userDetailsService(userDetailsService);
-
         return http.build();
 
     }

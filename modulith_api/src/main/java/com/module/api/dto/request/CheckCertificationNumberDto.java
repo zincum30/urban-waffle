@@ -6,5 +6,6 @@ import lombok.Getter;
 @Getter
 public class CheckCertificationNumberDto {
 
+    private String mail;
     private String certificationNumber;
 }

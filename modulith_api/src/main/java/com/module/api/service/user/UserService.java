@@ -20,7 +20,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void checkDuplicatedNickname(String nickname) {
-        if (userRepository.findByNickname(nickname).isEmpty()) {
+        if (userRepository.findByNickname(nickname).isPresent()) {
             throw new CustomException(CustomErrorCode.CONFLICT_NICKNAME);
         }
     }

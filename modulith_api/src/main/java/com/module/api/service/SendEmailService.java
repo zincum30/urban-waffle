@@ -12,15 +12,8 @@ import org.springframework.stereotype.Service;
 import java.security.NoSuchAlgorithmException;
 
 @Service
-//@PropertySource("classpath:application.yml")
-//@AllArgsConstructor
 @RequiredArgsConstructor
 public class SendEmailService {
-
-    // TODO :이메일 주소 설정...
-
-//    @Value("${spring.mail.username}")
-//    private String ADMIN_EMAIL;
 
     private final JavaMailSender mailSender;
     private final CertificationRedisTemplate certificationRedisTemplate;
@@ -38,6 +31,8 @@ public class SendEmailService {
             e.getMessage();
         }
     }
+
+    // TO DO : config에 있는 값 가져오려면????
 
     private void sendEmail(String email, String content) throws MessagingException {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
