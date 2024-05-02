@@ -26,8 +26,11 @@ public enum CustomErrorCode {
 
     // 409 CONFLICT
     CONFLICT_EMAIL(HttpStatus.CONFLICT, "이미 등록 된 이메일입니다."),
-    CONFLICT_NICKNAME(HttpStatus.CONFLICT, "이미 사용 중인 닉네임입니다.");
+    CONFLICT_NICKNAME(HttpStatus.CONFLICT, "이미 사용 중인 닉네임입니다."),
 
+
+    // 500 INTERNAL_SERVER_ERROR
+    UNEXPECTED_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "예상치 못한 오류가 발생했습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;

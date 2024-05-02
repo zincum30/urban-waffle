@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class WithdrawUserAccountFacade {
+public class DeleteUserAccountFacade {
 
     private final UserService userService;
     private final UserDetailService userDetailService;

@@ -2,15 +2,22 @@ package com.module.api.service;
 
 import com.module.api.certification.CertificationNumberGenerator;
 import com.module.api.certification.CertificationRedisTemplate;
+import com.module.api.exception.CustomErrorCode;
+import com.module.api.exception.CustomException;
 import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+@PropertySource("classpath:application.yml")
 @Service
 @RequiredArgsConstructor
 public class SendEmailService {
@@ -19,30 +26,35 @@ public class SendEmailService {
     private final CertificationRedisTemplate certificationRedisTemplate;
     private final CertificationNumberGenerator generator;
 
+    private static final String SENDER_ADDRESS = "ggm29@naver.com";
 
-    public void sendEmailForCertification(String email) {
 
+    public void sendMail(String mail) {
         try {
-            String certificationNumber = generator.createCertificationNumber();
-            String content = "인증번호 : " + certificationNumber;
-            certificationRedisTemplate.saveCertificationNumber(email, certificationNumber);
-            sendEmail(email, content);
-        } catch (NoSuchAlgorithmException | MessagingException e) {
-            e.getMessage();
+            String content = generator.createCertificationNumber();
+            certificationRedisTemplate.saveCertificationNumber(mail, content);
+            createMessage(mail, content);
+        } catch (MessagingException | NoSuchAlgorithmException e) {
+            e.getStackTrace();
+            throw new CustomException(CustomErrorCode.UNEXPECTED_ERROR);
         }
     }
 
-    // TO DO : config에 있는 값 가져오려면????
 
-    private void sendEmail(String email, String content) throws MessagingException {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
-        helper.setTo(email);
-        helper.setFrom("ggm29@naver.com");
-        helper.setSubject("인증번호");
-        helper.setText(content);
-        mailSender.send(mimeMessage);
+    private void createMessage(String mail, String content) throws MessagingException{
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+            helper.setFrom(SENDER_ADDRESS);
+            helper.setTo(mail);
+            helper.setSubject("메일 제목");
+            helper.setText(content);
+            mailSender.send(message);
+
     }
+
+
+
 
 
 }
