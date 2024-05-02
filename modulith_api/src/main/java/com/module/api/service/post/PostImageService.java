@@ -1,16 +1,23 @@
 package com.module.api.service.post;
 
+import com.module.api.dto.response.GetTemporaryImagesResponse;
 import com.module.api.entity.post.PostImageEntity;
 import com.module.api.exception.CustomErrorCode;
 import com.module.api.exception.CustomException;
 import com.module.api.repository.post.image.PostImageRepository;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
+import java.lang.annotation.Documented;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -54,6 +61,7 @@ public class PostImageService {
             throw new RuntimeException("이미지 저장 실패");
         }
     }
+
 
 
     // TODO : 이미지 이름을 넘겨줄 필요가 있나...생각중/ 그냥 url을 넘겨도??

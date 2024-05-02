@@ -4,6 +4,7 @@ import com.module.api.annotation.JwtRequired;
 import com.module.api.dto.request.CreatePostContentDto;
 import com.module.api.dto.response.FetchPostContentResponse;
 import com.module.api.dto.response.FetchPostListResponse;
+import com.module.api.service.AwsS3Service;
 import com.module.api.service.post.PostContentService;
 import com.module.api.service.post.PostImageService;
 
@@ -24,10 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 
-@JwtRequired
+//@JwtRequired
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/posts")
@@ -37,18 +39,19 @@ public class PostController {
     private final PostMetaService postMetaService;
     private final PostImageService postImageService;
     private final PostContentService postContentService;
+    private final AwsS3Service awsS3Service;
 
 
-    @PostMapping("/draft")
-    public ResponseEntity<Long> addTempPost(Authentication authentication) {
-        Long userId = (Long) authentication.getPrincipal();
-        Long postId = postMetaService.createMetaPost(userId);
-        return ResponseEntity.ok(postId);
-    }
+//    @PostMapping("/draft")
+//    public ResponseEntity<Long> addTempPost(Authentication authentication) {
+//        Long userId = (Long) authentication.getPrincipal();
+//        Long postId = postMetaService.createMetaPost(userId);
+//        return ResponseEntity.ok(postId);
+//    }
 
-    @PostMapping("/draft/{post-id}")
-    public void addTempPostImage(@RequestParam(value = "image") MultipartFile image, @PathVariable(name = "post-id") Long postId) {
-        postImageService.addImage(postId, image);
+    @PostMapping("/")
+    public void addTempPostImage(@RequestParam(value = "image") MultipartFile image) throws IOException {
+        awsS3Service.upload(image);
     }
 
     @GetMapping

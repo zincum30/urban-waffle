@@ -43,7 +43,7 @@ public class LoginFacade {
         }
 
         if (!(userService.isDormant(userId) && userDetailService.existsByUserId(userId))) {
-            sendEmailService.sendEmailForCertification(email);
+            sendEmailService.sendMail(email);
             }
             userService.updateLastLoginDate(userId);
             return LoginResponse.builder()

@@ -9,7 +9,7 @@ import com.module.api.dto.response.LoginResponse;
 import com.module.api.service.facade.FindUserProfileFacade;
 import com.module.api.service.facade.LoginFacade;
 import com.module.api.service.facade.RegisterFacade;
-import com.module.api.service.facade.WithdrawUserAccountFacade;
+import com.module.api.service.facade.DeleteUserAccountFacade;
 import com.module.api.service.user.UserAuthService;
 import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
@@ -34,7 +34,7 @@ public class UserController {
     private final UserDetailService userDetailService;
     private final UserService userService;
     private final UserAuthService userAuthService;
-    private final WithdrawUserAccountFacade withdrawUserAccountFacade;
+    private final DeleteUserAccountFacade deleteUserAccountFacade;
     private final FindUserProfileFacade findUserProfileFacade;
 
 
@@ -93,7 +93,7 @@ public class UserController {
     @DeleteMapping("/withdraw")
     public void withdrawUserAccount(Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
-        withdrawUserAccountFacade.withdrawUserAccount(userId);
+        deleteUserAccountFacade.withdrawUserAccount(userId);
     }
 
 }

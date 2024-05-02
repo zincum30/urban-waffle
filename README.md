@@ -21,8 +21,7 @@
 <br />
 <div>
   <img src="https://img.shields.io/badge/JAVA-orange?style=flat&logo=JAVA&logoColor=white"> 
-</div>
-<div>
+
   <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=square&logo=Spring Boot&logoColor=white&color=6DB33F">
 
   <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=square&logo=Spring Security&logoColor=white">
@@ -60,7 +59,7 @@ You can find various libraries such as Spring Security, Spring Data JPA, Queryds
 
 ![waffle_erd](https://github.com/zincum30/urban-waffle/assets/115124708/4c8e58a4-891b-489a-b196-5af1c4478d46)
 
-- main, dormant, batch, 총 세 개의 스키마로 구성
+
 - 참고 블로그 : [회원 가입 및 로그인을 위한 테이블 설계](https://rastalion.dev/%ed%9a%8c%ec%9b%90-%ea%b0%80%ec%9e%85-%eb%b0%8f-%eb%a1%9c%ea%b7%b8%ec%9d%b8%ec%9d%84-%ec%9c%84%ed%95%9c-%ed%85%8c%ec%9d%b4%eb%b8%94-%ec%84%a4%ea%b3%84/)
 
 ---
