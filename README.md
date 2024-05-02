@@ -45,11 +45,11 @@
 This project is a Spring Boot Starter project for some uncoventional attempts I want to try in an unstructured manner, with the goal of stepping up my skills.
 The following are the functionalities or libraries I wanted to implement or use through this project.
 
-+[x] 기능의 모듈화
-+[x] 다중 Database 활용 
-+[x] 휴면회원 기능 구현
-+[x] Spring Security 사용 
-+[x] RDB에서의 계층형 데이터 저장
++ [x] 기능의 모듈화
++ [x] 다중 Database 활용 
++ [x] 휴면회원 기능 구현
++ [x] Spring Security 사용 
++ [x] RDB에서의 계층형 데이터 저장
 
 You can find various libraries such as Spring Security, Spring Data JPA, Querydsl, JWT, Spring Batch, or Spring Modulith, and more. And you might also find some poor patterns or architectures.
 
