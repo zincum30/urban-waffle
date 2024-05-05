@@ -2,20 +2,16 @@ package com.module.api.service.facade;
 
 import com.module.api.authentication.jwt.JwtProvider;
 import com.module.api.dto.request.LoginDto;
-import com.module.api.dto.response.ActivateDormantAccountResponse;
 import com.module.api.dto.response.LoginResponse;
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.service.SendEmailService;
 import com.module.api.service.user.UserAuthService;
 import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
-import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.security.NoSuchAlgorithmException;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +35,7 @@ public class LoginFacade {
         String encodedPassword = userAuthService.findPassword(userId);
 
         if (!passwordEncoder.matches(password, encodedPassword)) {
-            throw new CustomException(CustomErrorCode.USER_NOT_FOUND);
+            throw new ApiException(ApiErrorCode.USER_NOT_FOUND);
         }
 
         if (!(userService.isDormant(userId) && userDetailService.existsByUserId(userId))) {

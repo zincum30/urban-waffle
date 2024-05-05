@@ -55,6 +55,8 @@ public class UserController {
 
 
     @PostMapping("/login")
+    // @LOGIN
+//    @API(name = Operation.LOGIN, description = "회원 로그인")
     public LoginResponse login(@RequestBody LoginDto loginDto) {
 
         // response로 토큰 돌려줌
@@ -82,6 +84,7 @@ public class UserController {
     }
 
 
+    // 내 profile 찾기? 다른 User profile 찾기?
     @GetMapping("/me")
     public void findUserProfile(@RequestParam("nickname") String nickname) {
 

@@ -6,6 +6,8 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.module.api.exception.s3.S3ErrorCode;
+import com.module.api.exception.s3.S3Exception;
 import lombok.RequiredArgsConstructor;
 import org.cef.handler.CefLoadHandler;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +41,6 @@ public class AwsS3Service {
 
     public String upload(MultipartFile image) throws IOException {
         String fileName = image.getOriginalFilename();
-
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(image.getSize());
         metadata.setContentType(image.getContentType());
@@ -59,7 +61,7 @@ public class AwsS3Service {
 
     private void validateImageFileExtention(String filename) {int lastDotIndex = filename.lastIndexOf(".");
         if (lastDotIndex == -1) {
-            throw new AmazonS3Exception("NO_FILE_EXTENTION");
+            throw new S3Exception(S3ErrorCode.INVALID_FILE_EXTENTION);
         }
 
         String extention = filename.substring(lastDotIndex + 1).toLowerCase();

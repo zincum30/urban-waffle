@@ -1,11 +1,21 @@
 package com.module.api.configurations;
 
+import com.module.api.certification.CertificationNumberGenerator;
+import com.module.api.certification.CertificationRedisTemplate;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
+import io.netty.handler.codec.MessageAggregationException;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 
 @Configuration(proxyBeanMethods = false)
@@ -13,7 +23,7 @@ import java.util.Properties;
 public class MailConfiguration {
 
     @Value("${spring.mail.username}")
-    private String MAIL_USER_NAME;
+    protected String MAIL_USER_NAME;
 
     @Value("${spring.mail.password}")
     private String MAIL_PASSWORD;
@@ -24,10 +34,11 @@ public class MailConfiguration {
     @Value("${spring.mail.port}")
     private int MAIL_PORT;
 
-    @Bean
-    JavaMailSenderImpl javaMailSender() {
-        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
+
+    @Bean
+    private JavaMailSenderImpl javaMailSender() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost(MAIL_HOST);
         javaMailSender.setPort(MAIL_PORT);
         javaMailSender.setUsername(MAIL_USER_NAME);

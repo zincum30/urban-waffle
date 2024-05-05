@@ -4,8 +4,8 @@ package com.module.api.service.user;
 import com.module.api.dto.request.ProfileImageRequest;
 import com.module.api.dto.request.UpdateNicknameDto;
 import com.module.api.entity.user.UserEntity;
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class UserService {
 
     public void checkDuplicatedNickname(String nickname) {
         if (userRepository.findByNickname(nickname).isPresent()) {
-            throw new CustomException(CustomErrorCode.CONFLICT_NICKNAME);
+            throw new ApiException(ApiErrorCode.CONFLICT_NICKNAME);
         }
     }
 
@@ -65,7 +65,7 @@ public class UserService {
 
     public Long findUserIdByNickname(String nickname) {
         UserEntity userEntity = userRepository.findByNickname(nickname).orElseThrow(
-                () -> new CustomException(CustomErrorCode.USER_NOT_FOUND));
+                () -> new ApiException(ApiErrorCode.USER_NOT_FOUND));
         return userEntity.getUserId();
     }
 

@@ -1,7 +1,7 @@
 package com.module.api.service;
 
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.certification.CertificationRedisTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class EmailVerifyService {
 
     public void verifyEmail(String email, String certificationNumber) {
         if (!isVerify(email, certificationNumber)) {
-            throw new CustomException(CustomErrorCode.INVALID_CERTIFICATION_NUMBER);
+            throw new ApiException(ApiErrorCode.INVALID_CERTIFICATION_NUMBER);
         }
         certificationRedisTemplate.removeCertificationNumber(email);
     }
@@ -22,7 +22,7 @@ public class EmailVerifyService {
 
     private boolean isVerify(String email, String certificationNumber) {
         if (!certificationRedisTemplate.hasKey(email)) {
-            throw new CustomException(CustomErrorCode.EMAIL_NOT_FOUND);
+            throw new ApiException(ApiErrorCode.EMAIL_NOT_FOUND);
         }
         return certificationRedisTemplate.getCertificationNumber(email).equals(certificationNumber);
     }

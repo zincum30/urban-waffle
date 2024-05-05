@@ -23,9 +23,7 @@ public class MailController {
     }
 
     @GetMapping("/verify")
-    public void verifyCertificationNumber(
-            @RequestParam("number") CheckCertificationNumberDto checkCertificationNumberDto
-            ) {
+    public void verifyCertificationNumber(@RequestParam("number") CheckCertificationNumberDto checkCertificationNumberDto) {
         verifyService.verifyEmail(checkCertificationNumberDto.getMail(), checkCertificationNumberDto.getCertificationNumber());
     }
 

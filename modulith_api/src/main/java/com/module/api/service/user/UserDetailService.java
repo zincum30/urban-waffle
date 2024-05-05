@@ -1,15 +1,13 @@
 package com.module.api.service.user;
 
-import com.module.api.dto.response.UserProfileResponse;
 import com.module.api.entity.user.UserDetailEntity;
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.repository.user.UserDetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.font.LayoutPath;
 import java.time.LocalDateTime;
 
 @Service
@@ -40,10 +38,10 @@ public class UserDetailService {
 
 
     // TODO : email에 해당하는 정보가 없는 경우 exception이 나는지? null이 return 되는지? 확인이 필요하겠구뇽~
-    // TODO : 확인 완료  ---> CustomException 돌려줌
+    // TODO : 확인 완료  ---> ApiException 돌려줌
     public void checkDuplicatedEmail(String email) {
         if (userDetailRepository.findByEmail(email).isPresent()) {
-            throw new CustomException(CustomErrorCode.CONFLICT_EMAIL);
+            throw new ApiException(ApiErrorCode.CONFLICT_EMAIL);
         }
     }
 
