@@ -40,6 +40,7 @@ You can find various libraries such as Spring Security, Spring Data JPA, Queryds
 
   <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=square&logo=Spring Boot&logoColor=white&color=6DB33F">
 
+
   <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=square&logo=Spring Security&logoColor=white">
   <img src="https://img.shields.io/badge/JSON Web Tokens-000000?style=square&logo=JSON Web Tokens&logoColor=white">
   <img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=square&logo=JPA&logoColor=white">
@@ -122,4 +123,12 @@ This is to achieve both the efficiency of the main schema and the security stabi
 
 ## Notes
 
+
+
+
+
+
+
+
 ![footer](https://capsule-render.vercel.app/api?type=waving&&color=timeAuto&section=footer)
+
