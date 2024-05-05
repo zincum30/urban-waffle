@@ -3,11 +3,10 @@ package com.module.api.service.comment;
 import com.module.api.dto.request.CreateCommentDto;
 import com.module.api.dto.response.FetchCommentListResponse;
 import com.module.api.entity.comment.CommentEntity;
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.repository.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,7 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+
 
 
     public List<FetchCommentListResponse> fetchCommentList(Long postId, Pageable pageable) {
@@ -39,9 +39,8 @@ public class CommentService {
         commentRepository.save(commentEntity);
     }
 
-    public void addReply(Long postId, Long commentId, Long userId, CreateCommentDto createCommentDto) {
+    public void addReply(Long commentId, Long userId, CreateCommentDto createCommentDto) {
         CommentEntity commentEntity = CommentEntity.builder()
-                .postId(postId)
                 .parentId(commentId)
                 .userId(userId)
                 .detail(createCommentDto.getDetail())
@@ -56,7 +55,7 @@ public class CommentService {
         CommentEntity commentEntity = commentRepository.getById(commentId);
         if (commentEntity.getUserId().equals(userId)) {
             commentEntity.updateDetail(detail);
-        } else throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
+        } else throw new ApiException(ApiErrorCode.NOT_AUTHORIZED);
 
         commentEntity = CommentEntity.builder()
                 .commentId(commentId)
@@ -76,7 +75,7 @@ public class CommentService {
                 .orElseThrow();
 
         if (!commentEntity.getUserId().equals(userId)) {
-            throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
+            throw new ApiException(ApiErrorCode.NOT_AUTHORIZED);
         }
 
         commentEntity = CommentEntity.builder()

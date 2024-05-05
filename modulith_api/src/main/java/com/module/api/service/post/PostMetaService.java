@@ -2,11 +2,10 @@ package com.module.api.service.post;
 
 import com.module.api.dto.response.FetchPostListResponse;
 import com.module.api.entity.post.PostMetaEntity;
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.repository.post.meta.PostMetaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +48,7 @@ public class PostMetaService {
         PostMetaEntity postMetaEntity = postMetaRepository.getById(postId);
         if (postMetaEntity.getUserId() == userId) {
             postMetaRepository.delete(postMetaEntity);
-        } else throw new CustomException(CustomErrorCode.NOT_AUTHORIZED);
+        } else throw new ApiException(ApiErrorCode.NOT_AUTHORIZED);
     }
 
 }

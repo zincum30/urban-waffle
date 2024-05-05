@@ -25,42 +25,43 @@ import java.util.List;
 @RestController
 @JwtRequired
 @RequiredArgsConstructor
-@RequestMapping("api/v1/posts")
+// 코멘트 수정 / 삭제 / reply 등에는 post에 대한 정보가 필요 한가?
+@RequestMapping("api/v1")
 public class CommentController {
 
     private final CommentService commentService;
     private final CreateCommentFacade createCommentFacade;
 
-    @GetMapping("/{post-id}/comments")
-    public ResponseEntity<List<FetchCommentListResponse>> fetchCommentsList(@PathVariable(name = "post-id")Long postId, Pageable pageable) {
-        return ResponseEntity.ok(commentService.fetchCommentList(postId,pageable));
+    @GetMapping("/posts/{post-id}/comments")
+    public ResponseEntity<List<FetchCommentListResponse>> fetchCommentsList(@PathVariable(name = "post-id") Long postId, Pageable pageable) {
+        return ResponseEntity.ok(commentService.fetchCommentList(postId, pageable));
 
     }
 
 
-    @PostMapping("/{post-id}/comments")
+    @PostMapping("/posts/{post-id}/comments")
     public ResponseEntity<HttpStatus> postComment(@PathVariable(name = "post-id") Long postId, @RequestBody PostCommentRequest commentRequest) {
         createCommentFacade.createComment(postId, commentRequest);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-
     // TODO : 근데 프론트에서 코멘트 아이디를 알 수가,,,있나..?
-    @PostMapping("{post-id}/comments/{comment-id}")
-    public ResponseEntity<HttpStatus> postReply(@PathVariable(name ="post-id") Long postId, @PathVariable(name = "comment-id") Long commentId, Authentication authentication, @RequestBody CreateCommentDto createCommentDto) {
+    // TODO : 코멘트 uri 변경 반영 필요
+    @PostMapping("/comments/reply/{comment-id}")
+    public ResponseEntity<HttpStatus> postReply(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, @RequestBody CreateCommentDto createCommentDto) {
         Long userId = (Long) authentication.getPrincipal();
-        commentService.addReply(postId, commentId, userId, createCommentDto);
+        commentService.addReply(commentId, userId, createCommentDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PutMapping("comments/{comment-id}")
+    @PutMapping("/comments/{comment-id}")
     public ResponseEntity<HttpStatus> updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
         Long userId = (Long) authentication.getPrincipal();
         commentService.updateComment(commentId, userId, detail);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{comment-id}")
+    @DeleteMapping("comments/{comment-id}")
     public ResponseEntity<String> deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
         commentService.deleteComment(commentId, userId);

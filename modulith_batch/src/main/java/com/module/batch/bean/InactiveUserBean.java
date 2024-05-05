@@ -17,11 +17,11 @@ import org.springframework.stereotype.Component;
 public class InactiveUserBean implements ItemReader<InactiveUserDto> {
 
 
-    // TO DO : DTO 적용하기..
+
     private final UserDetailRepository userDetailRepository;
 
     private Slice<InactiveUserDto> inactiveUserDtos = null;
-    // private int targetIndex = 10;
+
     private Integer currentIndex = 0;
     private Long cursorId = -1L;
 

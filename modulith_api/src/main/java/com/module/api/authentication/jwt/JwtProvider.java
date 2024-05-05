@@ -1,7 +1,7 @@
 package com.module.api.authentication.jwt;
 
-import com.module.api.exception.CustomErrorCode;
-import com.module.api.exception.CustomException;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -94,9 +94,9 @@ public class JwtProvider {
                     .getBody();
             return true;
         } catch (ExpiredJwtException expiredJwtException) {
-            throw new CustomException(CustomErrorCode.TOKEN_EXPIRED);
+            throw new ApiException(ApiErrorCode.TOKEN_EXPIRED);
         } catch (JwtException jwtException) {
-            throw new CustomException(CustomErrorCode.TOKEN_TAMPERED);
+            throw new ApiException(ApiErrorCode.TOKEN_TAMPERED);
         }
     }
 
