@@ -1,9 +1,9 @@
-![header](https://capsule-render.vercel.app/api?type=rect&color=timeAuto&section=header&text=Urban-Waffle&height=80&fontSize=60)
+![header](https://capsule-render.vercel.app/api?type=rect&color=timeAuto&section=header&text=Urban-Waffle&height=60&fontSize=40)
 
 ## Index
 
-1. [Abstract](#Abstract)
-2. [Tools](#Tools)
+[Abstract](#Abstract)           </br>
+[Tools](#Tools)
 
 
 ---
@@ -11,30 +11,6 @@
 ## Abstract
 
 <br />
-
-**Quirky, Experimental, Inefficient, and SUPER Personal**
-
-This project is a Spring Boot Starter project for some uncoventional attempts I want to try in an unstructured manner,
-with the goal of stepping up my skills.
-The following are the functionalities or libraries I wanted to implement or use through this project.
-
-+ [x] 기능의 모듈화
-+ [x] 다중 Database 활용
-+ [x] Spring Batch 사용
-+ [x] Spring Security 사용
-+ [x] RDB 계층형 데이터 설계
-
-
-I am trying to attain the primary goal of <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.
-You can find various libraries such as Spring Security, Spring Data JPA, Querydsl, JWT, Spring Batch, or Spring Modulith, and more. And you might also find some poor patterns or architectures. If you want more information about this project, click here
-
-
-<br />
-
----
-
-## Tools
-
 <div>
   <img src="https://img.shields.io/badge/JAVA-orange?style=flat&logo=JAVA&logoColor=white"> 
 
@@ -55,9 +31,32 @@ You can find various libraries such as Spring Security, Spring Data JPA, Queryds
 </div>
 <br/>
 
+**Quirky, Experimental, Inefficient, and SUPER Personal**
 
+This project is a Spring Boot Starter project for some uncoventional attempts I want to try in an unstructured manner,
+with the goal of stepping up my skills.
+The following are the functionalities or libraries I wanted to implement or use through this project.
+
++ [x] 기능의 모듈화
++ [x] 다중 Database 활용
++ [x] Spring Batch 사용
++ [x] Spring Security 사용
++ [x] RDB 계층형 데이터 설계
+
+
+I am trying to attain the primary goal of <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.
+
+
+You can find various libraries such as Spring Security, Spring Data JPA, Querydsl, JWT, Spring Batch, or Spring Modulith, and more. And you might also find some poor patterns or architectures. 
+
+If you want more information about this project, click here
+
+
+<br />
 
 ---
+
+
 ## Project Overview
     
 
@@ -119,9 +118,6 @@ This is to achieve both the efficiency of the main schema and the security stabi
 <summary><b>Structure</b></summary>
 </details>
 
-## Improvement
-
-## Notes
 
 
 

@@ -55,8 +55,6 @@ public class UserController {
 
 
     @PostMapping("/login")
-    // @LOGIN
-//    @API(name = Operation.LOGIN, description = "회원 로그인")
     public LoginResponse login(@RequestBody LoginDto loginDto) {
 
         // response로 토큰 돌려줌
