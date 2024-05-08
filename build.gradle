@@ -14,7 +14,6 @@ buildscript {
 
 }
 
-
 allprojects {
 	group = 'com.module'
 	version = '0.0.1-SNAPSHOT'
@@ -49,11 +48,6 @@ subprojects {
 	}
 
 
-//	dependencyManagement {
-//		imports {
-//			mavenBom "org.springframework.boot:spring-boot-dependencies:'1.1.4'"
-//		}
-//	}
 
 	compileJava {
 		options.annotationProcessorPath = configurations.annotationProcessor

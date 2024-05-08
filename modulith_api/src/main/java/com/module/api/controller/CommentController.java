@@ -40,13 +40,11 @@ public class CommentController {
 
 
     @PostMapping("/posts/{post-id}/comments")
-    public ResponseEntity<HttpStatus> postComment(@PathVariable(name = "post-id") Long postId, @RequestBody PostCommentRequest commentRequest) {
+    public void postComment(@PathVariable(name = "post-id") Long postId, @RequestBody PostCommentRequest commentRequest) {
         createCommentFacade.createComment(postId, commentRequest);
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    // TODO : 근데 프론트에서 코멘트 아이디를 알 수가,,,있나..?
-    // TODO : 코멘트 uri 변경 반영 필요
+
     @PostMapping("/comments/reply/{comment-id}")
     public ResponseEntity<HttpStatus> postReply(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, @RequestBody CreateCommentDto createCommentDto) {
         Long userId = (Long) authentication.getPrincipal();
@@ -55,17 +53,17 @@ public class CommentController {
     }
 
     @PutMapping("/comments/{comment-id}")
-    public ResponseEntity<HttpStatus> updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
+    public void updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
         Long userId = (Long) authentication.getPrincipal();
         commentService.updateComment(commentId, userId, detail);
-        return ResponseEntity.ok(HttpStatus.OK);
+
     }
 
     @DeleteMapping("comments/{comment-id}")
-    public ResponseEntity<String> deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
+    public void deleteComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
         commentService.deleteComment(commentId, userId);
-        return ResponseEntity.ok().body("DELETED");
+
     }
 
 }

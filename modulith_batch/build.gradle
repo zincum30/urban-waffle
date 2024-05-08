@@ -46,10 +46,5 @@ dependencies {
 //}
 
 
-//QueryDsl 설정부
-//def generated = 'src/main/generated'
 
-//clean {
-//	delete file(generated)
-//}
 
