@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final RegisterFacade registerFacade;
@@ -38,12 +38,12 @@ public class UserController {
     private final FindUserProfileFacade findUserProfileFacade;
 
 
-    @PostMapping
+    @PostMapping("/join")
     public void register(@RequestBody CreateUserDto createUserDto) {
         registerFacade.register(createUserDto);
     }
 
-    @GetMapping("/mail")
+    @GetMapping("/join/validity")
     public void checkDuplicatedEmail(@RequestParam("mail") String email) {
         userDetailService.checkDuplicatedEmail(email);
     }

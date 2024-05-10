@@ -17,7 +17,7 @@ public class FindUserProfileFacade {
         Long userId = userService.findUserIdByNickname(nickname);
         return UserProfileResponse.builder()
                 .nickname(nickname)
-                .profileImagePath(userService.findProfileImgPath(userId))
+                .profileImagePath(userService.findUserImgPath(userId))
                 .email(userDetailService.findEmailByUserId(userId))
                 .build();
     }

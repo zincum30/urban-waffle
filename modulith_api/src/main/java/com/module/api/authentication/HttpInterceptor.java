@@ -1,6 +1,7 @@
 package com.module.api.authentication;
 
 import com.module.api.annotation.JwtRequired;
+import com.module.api.annotation.Identification;
 import com.module.api.authentication.jwt.JwtProvider;
 import com.querydsl.core.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -46,7 +47,10 @@ public class HttpInterceptor implements HandlerInterceptor {
             }
         }
         return true;
+
     }
+
+
 
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);

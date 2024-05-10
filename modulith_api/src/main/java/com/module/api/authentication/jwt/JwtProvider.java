@@ -84,8 +84,6 @@ public class JwtProvider {
     }
 
 
-    // TODO : 예외 처리
-
     public Boolean isValidToken(String token) {
         try {
             Jwts.parser()
@@ -93,8 +91,16 @@ public class JwtProvider {
                     .parseClaimsJws(token)
                     .getBody();
             return true;
+
+            /*
+            만료된 토큰
+             */
         } catch (ExpiredJwtException expiredJwtException) {
             throw new ApiException(ApiErrorCode.TOKEN_EXPIRED);
+
+            /*
+            유효하지 않은 토큰
+             */
         } catch (JwtException jwtException) {
             throw new ApiException(ApiErrorCode.TOKEN_TAMPERED);
         }

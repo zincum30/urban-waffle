@@ -1,6 +1,7 @@
 package com.module.api.service.user;
 
 
+import com.module.api.dto.request.CreateUserDto;
 import com.module.api.dto.request.ProfileImageRequest;
 import com.module.api.dto.request.UpdateNicknameDto;
 import com.module.api.entity.user.UserEntity;
@@ -26,12 +27,18 @@ public class UserService {
     }
 
     @Transactional
-    public Long saveUser(String nickname) {
+    public Long saveUserNickname(CreateUserDto createUserDto) {
+        String email = createUserDto.getEmail();
         UserEntity userEntity = UserEntity.builder()
-                .nickname(nickname)
+                .nickname(nicknameGenerator(email))
                 .build();
         return userRepository.save(userEntity).getUserId();
     }
+
+    private String nicknameGenerator(String email) {
+        return email.substring(0, email.indexOf("@"));
+    }
+
 
     public Boolean isDormant(Long userId) {
         UserEntity userEntity = userRepository.getById(userId);
@@ -69,7 +76,7 @@ public class UserService {
         return userEntity.getUserId();
     }
 
-    public String findProfileImgPath(Long userId) {
+    public String findUserImgPath(Long userId) {
         UserEntity userEntity = userRepository.findById(userId).orElseThrow();
         return userEntity.getProfileImagePath();
     }

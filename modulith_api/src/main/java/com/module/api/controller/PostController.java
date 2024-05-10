@@ -30,7 +30,7 @@ import java.util.List;
 //@JwtRequired
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/posts")
+@RequestMapping("/posts")
 @Tag(name = "포스트 컨트롤러")
 public class PostController {
 
