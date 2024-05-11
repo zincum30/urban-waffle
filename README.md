@@ -2,9 +2,9 @@
 
 ## Index
 
-[Abstract](#Abstract)           </br>
-[Tools](#Tools)
-
+> 1. [Abstract](#Abstract)           
+> 2. [ERD](#ERD)
+> 3. [API](#API)
 
 ---
 
@@ -46,34 +46,10 @@ The following are the functionalities or libraries I wanted to implement or use 
 
 I am trying to attain the primary goal of <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.
 
-
-You can find various libraries such as Spring Security, Spring Data JPA, Querydsl, JWT, Spring Batch, or Spring Modulith, and more. And you might also find some poor patterns or architectures. 
-
 If you want more information about this project, click here
 
 
 <br />
-
----
-
-
-## Project Overview
-    
-
-#### ☑ 기능의 모듈화
-
-#### ☑ 다중 Database 활용
-```text
-This project deals with two schemas: MAIN and DORMANT.
-This is to achieve both the efficiency of the main schema and the security stability of dormant member information by storing it in a separate schema.          
-```  
-
-#### ☑ Spring Batch 사용
-
-#### ☑ Spring Security 사용
-
-#### ☑ RDB 계층형 데이터 설계
-
 
 
 
@@ -88,7 +64,19 @@ This is to achieve both the efficiency of the main schema and the security stabi
 
 ---
 
-## Flow Chart
+
+## API
+
+<details>
+<summary><b>사용자</b> (/api/v1/users)</summary>
+</details>
+
+<details>
+<summary><b>포스트</b> (/api/v1/posts)</summary>
+</details>
+
+
+
 
 ## System Architecture
 

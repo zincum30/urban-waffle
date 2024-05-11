@@ -21,7 +21,5 @@ public class ValidAccessTokenService {
         UserEntity userEntity = userRepository.getById(userId);
 
 
-
-
     }
 }

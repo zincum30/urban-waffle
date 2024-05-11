@@ -20,7 +20,6 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
 
-
     public List<FetchCommentListResponse> fetchCommentList(Long postId, Pageable pageable) {
         return commentRepository.fetchCommentList(postId, pageable);
     }
