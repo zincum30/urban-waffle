@@ -32,7 +32,8 @@ If you want more information about this project, click here
 
 
 
----
+<br />
+
 
 ## Tech Stack
 
@@ -62,9 +63,8 @@ If you want more information about this project, click here
 
 
 
+<br />
 
-
----
 
 ## ERD
 
