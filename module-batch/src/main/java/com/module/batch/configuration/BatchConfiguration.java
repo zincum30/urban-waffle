@@ -1,8 +1,8 @@
 package com.module.batch.configuration;
 
 
-import com.module.batch.bean.InactiveUserBean;
-import com.module.batch.bean.MultiDataSourceBean;
+import com.module.batch.job.bean.InactiveUserBean;
+import com.module.batch.job.bean.MultiDataSourceBean;
 import com.module.batch.dto.InactiveUserDto;
 import com.module.batch.dto.MultiDataSourceDto;
 import lombok.RequiredArgsConstructor;

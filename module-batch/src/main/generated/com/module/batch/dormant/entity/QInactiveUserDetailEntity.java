@@ -2,6 +2,7 @@ package com.module.batch.dormant.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.module.batch.entity.InactiveUserDetailEntity;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;

@@ -1,7 +1,7 @@
 package com.module.batch.dto;
 
 
-import com.module.batch.dormant.entity.InactiveUserDetailEntity;
+import com.module.batch.entity.InactiveUserDetailEntity;
 import com.module.batch.entity.UserDetailEntity;
 import lombok.Builder;
 import lombok.Getter;

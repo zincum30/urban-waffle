@@ -11,6 +11,8 @@
 
 ---
 
+<br />
+
 ## Abstract
 
 <br />
@@ -30,6 +32,9 @@ The following are the functionalities or libraries I wanted to implement or use 
 I aim to prioritize <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.
 If you want more information about this project, click here
 
+
+
+<br />
 
 
 <br />
@@ -66,6 +71,9 @@ If you want more information about this project, click here
 <br />
 
 
+<br />
+
+
 ## ERD
 
 ![waffle_erd](https://github.com/zincum30/urban-waffle/assets/115124708/4c8e58a4-891b-489a-b196-5af1c4478d46)
@@ -74,7 +82,7 @@ If you want more information about this project, click here
 
 
 
-
+<br />
 
 
 
