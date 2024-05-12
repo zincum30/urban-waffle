@@ -1,5 +1,5 @@
 rootProject.name = 'urban-waffle'
-include 'modulith_batch'
-include 'modulith_api'
+include 'module-batch'
+include 'module-api'
 
 

@@ -4,9 +4,9 @@
 
 ## Index
 
-> 1. [Abstract](#Abstract)
-> 2. [Tech Stack](#Tech Stack)
-> 3. [ERD](#ERD)
+- [Abstract](#Abstract)
+- [Tech Stack](#Tech-Stack)
+- [ERD](#ERD)
 
 
 ---
@@ -22,7 +22,7 @@ The following are the functionalities or libraries I wanted to implement or use 
 
 + [x] 기능의 모듈화
 + [x] 다중 Database 활용
-+ [x] Spring Batch 사용
++ [x] 휴면회원 처리
 + [x] Spring Security 사용
 + [x] RDB 계층형 데이터 설계
 
@@ -31,7 +31,6 @@ I aim to prioritize <code>scalability</code>, <code>efficiency</code>, and <code
 If you want more information about this project, click here
 
 
-<br />
 
 ---
 
@@ -62,7 +61,7 @@ If you want more information about this project, click here
   <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=square&logo=Amazon AWS&logoColor=white">
 
 
-<br />
+
 
 
 ---
