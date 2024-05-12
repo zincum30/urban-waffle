@@ -1,4 +1,4 @@
-package com.module.batch.dormant;//package com.homework.jinsimver.dormant;
+package com.module.batch.job;//package com.homework.jinsimver.dormant;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;

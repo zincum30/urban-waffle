@@ -1,4 +1,4 @@
-package com.module.batch.dormant.entity;
+package com.module.batch.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

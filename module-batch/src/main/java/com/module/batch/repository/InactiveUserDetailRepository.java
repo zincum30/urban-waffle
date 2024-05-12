@@ -1,6 +1,6 @@
-package com.module.batch.dormant.repository;
+package com.module.batch.repository;
 
-import com.module.batch.dormant.entity.InactiveUserDetailEntity;
+import com.module.batch.entity.InactiveUserDetailEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
