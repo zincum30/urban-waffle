@@ -1,7 +1,7 @@
 ![header](https://capsule-render.vercel.app/api?type=rect&color=timeAuto&section=header&text=Urban-Waffle&height=60&fontSize=40)
 
 
-## Index
+## 📑 Index
 
 1. [Abstract](#Abstract)
 2. [Tech Stack](#Tech-Stack)
@@ -31,7 +31,7 @@ The following are the functionalities or libraries I wanted to implement or use 
 
 
 I aim to prioritize <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.  
-If you want more information about this project, click here
+If you want more information about this project, click <u>[here.](https://github.com/zincum30/urban-waffle.wiki.git)</u>👈
 
 
 
@@ -58,7 +58,7 @@ If you want more information about this project, click here
 - **Database**  
   <img src="https://img.shields.io/badge/MySQL-4479A1.svg?style=square&logo=MySQL&logoColor=white">
   <img src="https://img.shields.io/badge/Redis-DC382D?style=square&logo=Redis&logoColor=white">
- <img src="https://img.shields.io/badge/AWS S3-569A31?style=square&logo=amazons3&logoColor=white">
+  <img src="https://img.shields.io/badge/AWS S3-569A31?style=square&logo=amazons3&logoColor=white">
 
 
 
@@ -142,19 +142,28 @@ If you want more information about this project, click here
 
 ## 5. Project Structure
 
-<br />
+
+
+![project-structure](https://github.com/zincum30/urban-waffle/assets/115124708/e5c30bca-61de-4c28-9e8b-e6dcb25946db)
+
+<details>
+<summary><b>Directory Structure</b> </summary>
+</details>
+
 
 **Modular Monolith**  
 
 In this project, I aimed to decompose independent operations or layers into modules.
 
-- Separation of Features  
+
+> Separation of Features  
 
 Firstly, I separated Spring Batch jobs that could impact the overall performance of the server system and degrade the quality of services.  
 The module boundaries are clearly defined enough to be completely separate from the existing process.  
 To address the issue associated with using a single database in modular monoliths, I created separate schemas, which makes it easier to separate the services in the future.
 
-- Separation of Layers  
+
+> Separation of Layers  
 
 Next, I separated the layers into two parts: one handling database access and the other handling user interface.  
 
