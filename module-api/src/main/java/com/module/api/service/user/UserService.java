@@ -30,14 +30,16 @@ public class UserService {
     public Long saveUserNickname(CreateUserDto createUserDto) {
         String email = createUserDto.getEmail();
         UserEntity userEntity = UserEntity.builder()
-                .nickname(nicknameGenerator(email))
+                .nickname(createUserDto.getNickname())
                 .build();
         return userRepository.save(userEntity).getUserId();
     }
 
-    private String nicknameGenerator(String email) {
-        return email.substring(0, email.indexOf("@"));
-    }
+//    private String nicknameGenerator(String email) {
+//        CreateUserDto createUserDto = new CreateUserDto();
+//        if (createUserDto.getNickname().isEmpty())
+//        return email.substring(0, email.indexOf("@"));
+//    }
 
 
     public Boolean isDormant(Long userId) {
@@ -46,10 +48,9 @@ public class UserService {
     }
 
 
-    @Transactional
     public void updateLastLoginDate(Long userId) {
         UserEntity userEntity = userRepository.getById(userId);
-        userEntity.updateLoginDate(LocalDateTime.now());
+        userEntity.updateLoginDate(LocalDateTime.now().minusMonths(1L));
         userRepository.save(userEntity);
     }
 
