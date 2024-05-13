@@ -14,4 +14,5 @@ public class InactiveUserDto {
         this.inactiveUser = inactiveUser;
     }
 
+
 }

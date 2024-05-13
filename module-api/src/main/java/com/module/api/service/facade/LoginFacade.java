@@ -38,12 +38,19 @@ public class LoginFacade {
             throw new ApiException(ApiErrorCode.USER_NOT_FOUND);
         }
 
-        if (!(userService.isDormant(userId) && userDetailService.existsByUserId(userId))) {
-            sendEmailService.sendMail(email);
-            }
-            userService.updateLastLoginDate(userId);
-            return LoginResponse.builder()
-                    .accessToken(jwtProvider.createAccessToken(userId)).build();
+//        if (!(userService.isDormant(userId) && userDetailService.existsByUserId(userId))) {
+//            sendEmailService.sendMail(email);
+//            }
+//            userService.updateLastLoginDate(userId);
+//            return LoginResponse.builder()
+//                    .accessToken(jwtProvider.createAccessToken(userId)).build();
 
+        if (!(userService.isDormant(userId) && userDetailService.existsByUserId(userId))) {
+            userService.updateLastLoginDate(userId);
+        } else throw new ApiException(ApiErrorCode.USER_NOT_FOUND);
+
+        return LoginResponse.builder()
+                .accessToken(jwtProvider.createAccessToken(userId)).build();
     }
 }
+
