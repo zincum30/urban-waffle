@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAspectJAutoProxy
 @EnableJpaRepositories(basePackages = "com.module.api")
 @EnableJpaAuditing
-@SpringBootApplication(scanBasePackages = {"com.module.api", "com.module.chat"})
+@SpringBootApplication(scanBasePackages = {"com.module.api"})
 public class ApiApplication {
 
     public static void main(String[] args) {
