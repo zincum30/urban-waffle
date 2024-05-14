@@ -37,9 +37,6 @@ public class UserDetailEntity {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     @Column(name = "joined_date")
     private LocalDateTime joinedDate;
 

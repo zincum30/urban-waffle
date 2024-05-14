@@ -10,12 +10,20 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 
+
 @Getter
-@Builder
+@AllArgsConstructor
 public class UserInformation {
 
     private final UserEntity user;
     private final UserDetailEntity userDetail;
     private final UserAuthEntity userAuth;
+
+//    @Builder
+//    protected UserInformation (UserEntity user, UserDetailEntity userDetail, UserAuthEntity userAuth) {
+//        this.user = user;
+//        this.userDetail = userDetail;
+//        this.userAuth = userAuth;
+//    }
 
 }
