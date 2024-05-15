@@ -24,7 +24,6 @@ public class UserDetailService {
                 .userId(userId)
                 .name(name)
                 .email(email)
-                .phoneNumber(phoneNumber)
                 .joinedDate(LocalDateTime.now())
                 .build();
         return userDetailRepository.save(userDetailEntity).getUserDetailId();
@@ -35,7 +34,6 @@ public class UserDetailService {
     public Long findUserIdByEmail(String email) {
         return userDetailRepository.findUserIdByEmail(email).orElseThrow().getUserId();
     }
-
 
 
     public void checkDuplicatedEmail(String email) {
@@ -62,5 +60,10 @@ public class UserDetailService {
         return userDetailEntity.getEmail();
     }
 
+    public boolean matchUserDetail(String name, String email) {
+        UserDetailEntity userDetail = userDetailRepository.findUserIdByEmail(email).orElseThrow();
+        return userDetail.getName().equals(name);
+
+    }
 
 }

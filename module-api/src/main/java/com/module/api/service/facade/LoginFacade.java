@@ -1,7 +1,7 @@
 package com.module.api.service.facade;
 
 import com.module.api.authentication.jwt.JwtProvider;
-import com.module.api.dto.request.LoginDto;
+import com.module.api.dto.request.user.LoginDto;
 import com.module.api.dto.response.LoginResponse;
 import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;

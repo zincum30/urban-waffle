@@ -1,6 +1,6 @@
 package com.module.api.service.post;
 
-import com.module.api.dto.request.CreatePostContentDto;
+import com.module.api.dto.request.post.CreatePostContentDto;
 import com.module.api.dto.response.FetchPostContentResponse;
 import com.module.api.entity.post.PostContentEntity;
 import com.module.api.repository.post.content.PostContentRepository;
@@ -27,15 +27,14 @@ public class PostContentService {
     }
 
 
-    // TODO : update 일단 보류,, 생성/수정일자가 meta에 들어가는 게 맞지 않나???
-//    public void updatePostContent(UpdatePostContentDto updatePostContentDto) {
-//
-//        PostContentEntity postContentEntity = postContentRepository.getById(postContentId);
-//        postContentEntity = PostContentEntity.builder()
-//                .
-//                .content(updatePostContentDto.getContent())
-//                .build();
-//        postContentRepository.save(postContentEntity);
-//
-//    }
+    public void updatePostContent(Long postId, String content) {
+        PostContentEntity postContentEntity = postContentRepository.getByPostId(postId);
+
+        postContentEntity = PostContentEntity.builder()
+                .postId(postId)
+                .postContentId(postContentEntity.getPostContentId())
+                .content(content)
+                .build();
+        postContentRepository.save(postContentEntity);
+    }
 }

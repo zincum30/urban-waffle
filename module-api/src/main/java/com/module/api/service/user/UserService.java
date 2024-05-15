@@ -1,9 +1,9 @@
 package com.module.api.service.user;
 
 
-import com.module.api.dto.request.CreateUserDto;
-import com.module.api.dto.request.ProfileImageRequest;
-import com.module.api.dto.request.UpdateNicknameDto;
+import com.module.api.dto.request.user.CreateUserDto;
+import com.module.api.dto.request.user.ProfileImageRequest;
+import com.module.api.dto.request.user.UpdateNicknameDto;
 import com.module.api.entity.user.UserEntity;
 import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;

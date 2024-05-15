@@ -1,4 +1,4 @@
-package com.module.api.dto.request;
+package com.module.api.dto.request.user;
 
 
 import com.module.api.entity.user.UserDetailEntity;

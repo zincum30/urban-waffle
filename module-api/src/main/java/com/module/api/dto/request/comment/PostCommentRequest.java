@@ -1,4 +1,4 @@
-package com.module.api.dto.request;
+package com.module.api.dto.request.comment;
 
 import lombok.Getter;
 

@@ -1,10 +1,10 @@
-package com.module.api.dto.request;
+package com.module.api.dto.request.user;
 
 
 import lombok.Getter;
 
 @Getter
-public class CheckCertificationNumberDto {
+public class CheckCertificationRequest {
 
     private String mail;
     private String certificationNumber;
