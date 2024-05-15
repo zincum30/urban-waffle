@@ -151,10 +151,9 @@ If you want more information about this project, click <u>[here](https://github.
 
 
 #### Modular Monolith
-In this project, I aimed to decompose independent operations or layers into modules.
 
-Firstly, I separated Spring Batch jobs that could impact the overall performance of the server system and degrade the quality of services.  
-The module boundaries are clearly defined enough to be completely separate from the existing process.  
+I separated Spring Batch jobs that could impact the overall performance of the server system and degrade the quality of services.  
+The module boundaries are clearly defined enough to be completely separate from the existing process.
 To address the issue associated with using a single database in modular monoliths, I created separate schemas, which makes it easier to separate the services in the future.
 
 
