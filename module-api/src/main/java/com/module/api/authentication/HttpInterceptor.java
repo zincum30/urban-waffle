@@ -1,7 +1,6 @@
 package com.module.api.authentication;
 
 import com.module.api.annotation.JwtRequired;
-import com.module.api.annotation.Identification;
 import com.module.api.authentication.jwt.JwtProvider;
 import com.querydsl.core.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;

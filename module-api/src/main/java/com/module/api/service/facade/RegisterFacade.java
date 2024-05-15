@@ -1,13 +1,11 @@
 package com.module.api.service.facade;
 
-import com.module.api.dto.request.CreateUserDto;
-import com.module.api.entity.user.UserEntity;
+import com.module.api.dto.request.user.CreateUserDto;
 import com.module.api.service.user.UserAuthService;
 import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

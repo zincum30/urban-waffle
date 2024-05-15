@@ -39,6 +39,9 @@ public class PostMetaService {
         return postMetaRepository.fetchPostList(pageable);
     }
 
+    public Long findUserIdByPostId(Long postId) {
+        return postMetaRepository.getById(postId).getUserId();
+    }
 
 
 

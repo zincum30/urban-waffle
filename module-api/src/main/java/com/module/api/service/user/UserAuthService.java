@@ -1,7 +1,7 @@
 package com.module.api.service.user;
 
 
-import com.module.api.dto.request.UpdatePassworDto;
+import com.module.api.dto.request.user.UpdatePassworDto;
 import com.module.api.entity.user.UserAuthEntity;
 import com.module.api.repository.user.UserAuthRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +35,7 @@ public class UserAuthService {
     public String findPassword(Long userId) {
         return userAuthRepository.findByUserId(userId).orElseThrow().getPassword();
     }
+
 
 
     @Transactional

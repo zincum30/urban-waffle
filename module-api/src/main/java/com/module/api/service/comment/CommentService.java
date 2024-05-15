@@ -1,6 +1,6 @@
 package com.module.api.service.comment;
 
-import com.module.api.dto.request.CreateCommentDto;
+import com.module.api.dto.request.comment.CreateCommentRequest;
 import com.module.api.dto.response.FetchCommentListResponse;
 import com.module.api.entity.comment.CommentEntity;
 import com.module.api.exception.api.ApiErrorCode;
@@ -38,11 +38,11 @@ public class CommentService {
         commentRepository.save(commentEntity);
     }
 
-    public void addReply(Long commentId, Long userId, CreateCommentDto createCommentDto) {
+    public void addReply(Long commentId, Long userId, CreateCommentRequest createCommentRequest) {
         CommentEntity commentEntity = CommentEntity.builder()
                 .parentId(commentId)
                 .userId(userId)
-                .detail(createCommentDto.getDetail())
+                .detail(createCommentRequest.getDetail())
                 .delete(false)
                 .createdDate(LocalDateTime.now())
                 .modifiedDate(LocalDateTime.now())
