@@ -1,8 +1,10 @@
 package com.module.api.service.user;
 
 
-import com.module.api.dto.request.user.UpdatePassworDto;
+import com.module.api.dto.request.user.UpdatePassworRequest;
 import com.module.api.entity.user.UserAuthEntity;
+import com.module.api.exception.api.ApiErrorCode;
+import com.module.api.exception.api.ApiException;
 import com.module.api.repository.user.UserAuthRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,15 +33,19 @@ public class UserAuthService {
     }
 
 
-    // TODO : 수정 필요
+
     public String findPassword(Long userId) {
-        return userAuthRepository.findByUserId(userId).orElseThrow().getPassword();
+        UserAuthEntity userAuthEntity;
+        if(userAuthRepository.existsByUserId(userId)) {
+            userAuthEntity = userAuthRepository.getReferenceByUserId(userId);
+        } else throw new ApiException(ApiErrorCode.USER_NOT_FOUND);
+        return userAuthEntity.getPassword();
     }
 
 
 
     @Transactional
-    public void updatePassword(UpdatePassworDto passworDto) {
+    public void updatePassword(UpdatePassworRequest passworDto) {
         UserAuthEntity userAuthEntity = UserAuthEntity.builder()
                 .password(passwordEncoder.encode(passworDto.getPassword()))
                 .updatedDate(LocalDateTime.now())

@@ -40,7 +40,6 @@ public class HttpInterceptor implements HandlerInterceptor {
                 Authentication authentication = jwtProvider.getAuthentication(jwt);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception ex) {
-                // System.out.println(ex.getLocalizedMessage());
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 return false;
             }

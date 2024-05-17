@@ -1,12 +1,9 @@
 package com.module.api.dto.request.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-public class CreateUserDto {
+public class CreateUserRequest {
 
     private Long userId;
     private String name;

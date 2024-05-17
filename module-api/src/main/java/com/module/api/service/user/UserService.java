@@ -1,9 +1,9 @@
 package com.module.api.service.user;
 
 
-import com.module.api.dto.request.user.CreateUserDto;
+import com.module.api.dto.request.user.CreateUserRequest;
 import com.module.api.dto.request.user.ProfileImageRequest;
-import com.module.api.dto.request.user.UpdateNicknameDto;
+import com.module.api.dto.request.user.UpdateNicknameRequest;
 import com.module.api.entity.user.UserEntity;
 import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;
@@ -21,22 +21,23 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void checkDuplicatedNickname(String nickname) {
-        if (userRepository.findByNickname(nickname).isPresent()) {
+        boolean isDupicatedNickname = userRepository.existsByNickname(nickname);
+        if(isDupicatedNickname) {
             throw new ApiException(ApiErrorCode.CONFLICT_NICKNAME);
         }
     }
 
     @Transactional
-    public Long saveUserNickname(CreateUserDto createUserDto) {
-        String email = createUserDto.getEmail();
+    public Long saveUserNickname(CreateUserRequest createUserRequest) {
+        String email = createUserRequest.getEmail();
         UserEntity userEntity = UserEntity.builder()
-                .nickname(createUserDto.getNickname())
+                .nickname(createUserRequest.getNickname())
                 .build();
         return userRepository.save(userEntity).getUserId();
     }
 
 //    private String nicknameGenerator(String email) {
-//        CreateUserDto createUserDto = new CreateUserDto();
+//        CreateUserRequest createUserDto = new CreateUserRequest();
 //        if (createUserDto.getNickname().isEmpty())
 //        return email.substring(0, email.indexOf("@"));
 //    }
@@ -64,9 +65,9 @@ public class UserService {
     }
 
     @Transactional
-    public void updateNickname(UpdateNicknameDto nicknameDto, Long userId) {
+    public void updateNickname(UpdateNicknameRequest updateNicknameRequest, Long userId) {
         UserEntity userEntity = userRepository.getById(userId);
-        userEntity.updateNickname(nicknameDto.getNickname());
+        userEntity.updateNickname(updateNicknameRequest.getNickname());
         userRepository.save(userEntity);
     }
 
