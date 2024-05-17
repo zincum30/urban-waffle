@@ -8,7 +8,6 @@
 3. [ERD](#ERD)
 4. [API](#API)
 5. [Project Structure](#Project-Structure)
-6. [Features](#Features)
 
 
 ---
@@ -167,22 +166,9 @@ I separated Spring Batch jobs that could impact the overall performance of the s
 The module boundaries are clearly defined enough to be completely separate from the existing process.
 To address the issue associated with using a single database in modular monoliths, I created separate schemas, which makes it easier to separate the services in the future.
 
-<details>
-<summary><b>Directories</b> </summary>
-</details>
-<br />
 
 <br />
 
-<br />
-
-
-
-
-## 6. Features
-
-
-## 7. 
 
 
 
