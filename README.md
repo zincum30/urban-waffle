@@ -8,6 +8,7 @@
 3. [ERD](#ERD)
 4. [API](#API)
 5. [Project Structure](#Project-Structure)
+6. [Features](#Features)
 
 
 ---
@@ -172,6 +173,10 @@ To address the issue associated with using a single database in modular monolith
 <br />
 
 <br />
+
+<br />
+
+
 
 
 ## 6. Features
