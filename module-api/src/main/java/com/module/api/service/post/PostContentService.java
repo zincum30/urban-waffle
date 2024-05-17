@@ -23,6 +23,7 @@ public class PostContentService {
 
 
     public FetchPostContentResponse fetchPostContent(Long postId) {
+
         return postContentRepository.fetchContent(postId);
     }
 

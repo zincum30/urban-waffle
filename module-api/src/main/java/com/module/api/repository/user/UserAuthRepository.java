@@ -12,5 +12,9 @@ public interface UserAuthRepository extends JpaRepository<UserAuthEntity, Long> 
 
     Optional<UserAuthEntity> findByUserId(Long userId);
 
+    boolean existsByUserId(Long userId);
+
+    UserAuthEntity getReferenceByUserId(Long userId);
+
 
 }

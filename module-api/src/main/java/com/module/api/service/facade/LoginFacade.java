@@ -1,7 +1,7 @@
 package com.module.api.service.facade;
 
 import com.module.api.authentication.jwt.JwtProvider;
-import com.module.api.dto.request.user.LoginDto;
+import com.module.api.dto.request.user.LoginRequest;
 import com.module.api.dto.response.LoginResponse;
 import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;
@@ -26,10 +26,10 @@ public class LoginFacade {
 
     // TO DO : 이벤트 처리 알아보기
 
-    public LoginResponse signIn(LoginDto loginDto) {
+    public LoginResponse signIn(LoginRequest loginRequest) {
 
-        String email = loginDto.getEmail();
-        String password = loginDto.getPassword();
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
 
         Long userId = userDetailService.findUserIdByEmail(email);
         String encodedPassword = userAuthService.findPassword(userId);
