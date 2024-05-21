@@ -26,8 +26,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -55,12 +59,14 @@ public class UserController {
 
     @Operation(summary = "회원가입")
     @PostMapping("/join")
+    @Transactional
     public void register(@RequestBody CreateUserRequest createUserRequest) {
         registerFacade.register(createUserRequest);
     }
 
     @Operation(summary = "이메일 중복 확인")
     @GetMapping("/join")
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public void checkDuplicatedEmail(@RequestParam("email") String email) {
         userDetailService.checkDuplicatedEmail(email);
         throw new ApiException(ApiErrorCode.CONFLICT_NICKNAME);
@@ -68,6 +74,7 @@ public class UserController {
 
     @Operation(summary = "닉네임 중복 확인")
     @GetMapping
+    @Transactional
     public ResponseEntity<String> checkDuplicatedNickname(@RequestParam(name = "nickname") String nickname) {
         userService.checkDuplicatedNickname(nickname);
         return ResponseEntity.ok("사용가능한 닉네임입니다.");
@@ -111,7 +118,7 @@ public class UserController {
     }
 
     @Operation(summary = "회원 프로필 이미지 수정")
-    @PutMapping("/{nickname}/image")
+    @PatchMapping("/{nickname}/image")
     public void updateProfileImg(
             @RequestBody ProfileImageRequest profileImageRequest, Authentication authentication
     ) {
@@ -120,7 +127,7 @@ public class UserController {
     }
 
     @Operation(summary = "회원 닉네임 수정")
-    @PutMapping("/{nickname}")
+    @PatchMapping("/{nickname}")
     public void updateNickname(@RequestBody UpdateNicknameRequest updateNicknameRequest, Authentication authentication) {
         Long userId = (Long) authentication.getPrincipal();
         userService.updateNickname(updateNicknameRequest, userId);

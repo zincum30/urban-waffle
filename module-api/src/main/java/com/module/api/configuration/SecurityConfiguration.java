@@ -1,4 +1,4 @@
-package com.module.api.configurations;
+package com.module.api.configuration;
 
 import com.module.api.authentication.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;

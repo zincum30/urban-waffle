@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -65,7 +66,7 @@ public class PostController {
     }
 
     @Operation(summary = "게시글 수정")
-    @PutMapping("/{post-id}")
+    @PatchMapping("/{post-id}")
     public void editPost(@PathVariable(name = "post-id") Long postId,
                          @RequestBody UpdatePostContentDto updatePostContentDto,
                          Authentication authentication
@@ -75,7 +76,7 @@ public class PostController {
     }
 
 
-    @Operation(summary = "게시글 전체 목록 불러오기")
+    @Operation(summary = "게시글 페이지네이션")
     @GetMapping
     public ResponseEntity<List<FetchPostListResponse>> fetchPostList() {
         return ResponseEntity.ok(postMetaService.fetchPostsList(null));
