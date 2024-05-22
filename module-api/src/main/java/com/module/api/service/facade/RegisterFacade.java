@@ -1,6 +1,6 @@
 package com.module.api.service.facade;
 
-import com.module.api.dto.request.user.CreateUserDto;
+import com.module.api.dto.request.user.CreateUserRequest;
 import com.module.api.service.user.UserAuthService;
 import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
@@ -17,10 +17,10 @@ public class RegisterFacade {
 
 
 
-    public void register(CreateUserDto createUserDto) {
-        Long userId = userService.saveUserNickname(createUserDto);
-        userDetailService.saveUserDetail(userId, createUserDto.getName(), createUserDto.getEmail(), createUserDto.getPhoneNumber());
-        userAuthService.saveUserAuth(userId, createUserDto.getPassword());
+    public void register(CreateUserRequest createUserRequest) {
+        Long userId = userService.saveUserNickname(createUserRequest);
+        userDetailService.saveUserDetail(userId, createUserRequest.getName(), createUserRequest.getEmail(), createUserRequest.getPhoneNumber());
+        userAuthService.saveUserAuth(userId, createUserRequest.getPassword());
     }
 
 

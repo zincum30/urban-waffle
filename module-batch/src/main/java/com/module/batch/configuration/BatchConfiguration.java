@@ -1,6 +1,7 @@
 package com.module.batch.configuration;
 
 
+import com.module.batch.event.UpdateCompletionConsumer;
 import com.module.batch.job.bean.InactiveUserBean;
 import com.module.batch.job.bean.MultiDataSourceBean;
 import com.module.batch.dto.InactiveUserDto;
@@ -24,6 +25,7 @@ public class BatchConfiguration {
 
     private static final int CHUNK_SIZE = 10;
 
+    private final UpdateCompletionConsumer updateCompletionConsumer;
 
     private final InactiveUserBean inactiveUserBean;
     private final MultiDataSourceBean multiDataSourceBean;
@@ -33,7 +35,6 @@ public class BatchConfiguration {
     public Job dormantJob(JobRepository jobRepository, Step dormantJobStep) {
         return new JobBuilder("dormantJob", jobRepository)
                 .start(dormantJobStep)
-                //.preventRestart()
                 .incrementer(new RunIdIncrementer())
                 .build();
 
@@ -50,6 +51,7 @@ public class BatchConfiguration {
                 .reader(inactiveUserBean)
                 .processor(multiDataSourceBean)
                 .writer(multiDataSourceBean)
+                .listener(updateCompletionConsumer)
                 .transactionManager(platformTransactionManager)
                 .startLimit(1)
                 .build();

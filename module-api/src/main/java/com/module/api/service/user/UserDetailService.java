@@ -32,12 +32,17 @@ public class UserDetailService {
 
     // TODO : 재확인 필요
     public Long findUserIdByEmail(String email) {
-        return userDetailRepository.findUserIdByEmail(email).orElseThrow().getUserId();
+        UserDetailEntity userDetailEntity;
+        if(userDetailRepository.existsByEmail(email)) {
+            userDetailEntity = userDetailRepository.getReferenceByEmail(email);
+        } else throw new ApiException(ApiErrorCode.USER_NOT_FOUND);
+        return userDetailEntity.getUserId();
     }
 
 
     public void checkDuplicatedEmail(String email) {
-        if (userDetailRepository.findByEmail(email).isPresent()) {
+        boolean isDuplicatedEmail = userDetailRepository.existsByEmail(email);
+        if(isDuplicatedEmail) {
             throw new ApiException(ApiErrorCode.CONFLICT_EMAIL);
         }
     }

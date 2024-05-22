@@ -1,38 +1,35 @@
 ![header](https://capsule-render.vercel.app/api?type=rect&color=timeAuto&section=header&text=Urban-Waffle&height=60&fontSize=40)
 
 
-## 📑 Index
 
-1. [Abstract](#Abstract)
-2. [Tech Stack](#Tech-Stack)
-3. [ERD](#ERD)
-4. [API](#API)
-5. [Project Structure](#Project-Structure)
-
-
----
 
 <br />
 
-## 1. Abstract
+## Overview
 
 <br />
 
 **Quirky, Experimental, Inefficient, and SUPER Personal**
 
 This Spring Boot Starter project includes basic CRUD operations for members, boards, and comments. I aim to improve my skills by exploring unconventional approaches through such endeavors.
-The following are the functionalities or libraries I wanted to implement or use through this project.
+The following are the features I have completed in this project:
 
 + [x] 기능의 모듈화
 + [x] 다중 Database 활용
 + [x] 휴면회원 처리
 + [x] Spring Security 사용
-+ [x] RDB 계층형 데이터 설계
-+ [ ] Axon Framework 사용
++ [x] QueryDSL 사용
 
+The following are the features I plan to implement in this project:
+
++ [ ] Axon Framework 적용
++ [ ] DDD 및 EDA 활용
++ [ ] gRPC, Web Client 구현
+
+Of course, these may be changed or added to.
 
 I aim to prioritize <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.  
-If you want more information about this project, click <u>[here](https://github.com/zincum30/urban-waffle.wiki.git)</u> 👈
+
 
 
 
@@ -102,9 +99,9 @@ If you want more information about this project, click <u>[here](https://github.
 |  POST  |          /help/password           |   비밀번호 찾기   |
 |  GET   | /help/certification?email={email} | 본인 인증 메일 발송 |
 |  POST  |        /help/cergification        |  인증 번호 확인   |
-|  GET   |              /{user}              |   프로필 정보    |
-|  PUT   |              /{user}              | 프로필 이미지 변경  |
-|  PUT   |    /{user}?nickname={nickname}    |   닉네임 변경    |
+|  GET   |            /{nickname}            |   프로필 정보    |
+|  PUT   |         /{nickname}/image         | 프로필 이미지 변경  |
+|  PUT   |            /{nickname}            |   닉네임 변경    |
 |  GET   |    /{user}?nickname={nickname}    |  닉네임 중복 확인  |
 |  POST  |         /{user}/security          |   비밀번호 변경   |
 | DELETE |              /{user}              |     탈퇴      |
@@ -136,11 +133,12 @@ If you want more information about this project, click <u>[here](https://github.
 |  PUT   |       /{comment}        |    댓글 수정    |
 | DELETE |       /{comment}        |    댓글 삭제    |
 |  POST  |     {comment}/reply     |   대댓글 작성    |
-|  PUT   | {comment}/reply/{reply} |   대댓글 수정    |
-| DELETE | {comment}/reply/{reply} |   대댓글 삭제    |
+|  PUT   | {comment}?reply={reply} |   대댓글 수정    |
+| DELETE | {comment}?reply={reply} |   대댓글 삭제    |
 |  GET   |         /{post}         |  전체 댓글 목록   |
 |  GET   |    /{comment}/reply     |  전체 대댓글 목록  |
 </details>
+
 
 
 <br/>
@@ -153,11 +151,16 @@ If you want more information about this project, click <u>[here](https://github.
 #### Modular Monolith
 
 I separated Spring Batch jobs that could impact the overall performance of the server system and degrade the quality of services.  
+
+![project-structure](https://github.com/zincum30/urban-waffle/assets/115124708/c0fb090e-3b17-49c5-ba89-f5274b675d99)
+
 The module boundaries are clearly defined enough to be completely separate from the existing process.
 To address the issue associated with using a single database in modular monoliths, I created separate schemas, which makes it easier to separate the services in the future.
 
 
 <br />
+
+
 
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&&color=timeAuto&section=footer)

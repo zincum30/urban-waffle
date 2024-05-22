@@ -1,7 +1,7 @@
 package com.module.api.service.comment;
 
 import com.module.api.dto.request.comment.CreateCommentRequest;
-import com.module.api.dto.response.FetchCommentListResponse;
+import com.module.api.dto.response.CommentsResponse;
 import com.module.api.entity.comment.CommentEntity;
 import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;
@@ -20,7 +20,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
 
-    public List<FetchCommentListResponse> fetchCommentList(Long postId, Pageable pageable) {
+    public List<CommentsResponse> fetchCommentList(Long postId, Pageable pageable) {
         return commentRepository.fetchCommentList(postId, pageable);
     }
 

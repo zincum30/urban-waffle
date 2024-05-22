@@ -6,12 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class UserDetailDto {
+public class UserDetailRequest {
 
     private final UserDetailEntity userDetail;
 
     @Builder
-    public UserDetailDto(UserDetailEntity userDetail) {
+    public UserDetailRequest(UserDetailEntity userDetail) {
         this.userDetail = userDetail;
     }
 }

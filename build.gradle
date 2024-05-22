@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '3.2.1'
+		springBootVersion = '3.2.2'
 	}
 
 	repositories {
@@ -58,6 +58,8 @@ subprojects {
 		implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 		implementation 'io.lettuce:lettuce-core:6.2.1.RELEASE'
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+		implementation 'org.springframework.kafka:spring-kafka'
 
 		compileOnly 'org.projectlombok:lombok:1.18.22'
 

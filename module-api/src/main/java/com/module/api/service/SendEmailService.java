@@ -2,7 +2,6 @@ package com.module.api.service;
 
 import com.module.api.certification.CertificationNumberGenerator;
 import com.module.api.certification.CertificationRedisTemplate;
-import com.module.api.configurations.MailConfiguration;
 import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;
 import jakarta.mail.MessagingException;
