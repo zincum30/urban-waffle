@@ -1,0 +1,10 @@
+package com.module.api.dto.request.user;
+
+import lombok.Getter;
+
+@Getter
+public class ProfileImageRequest {
+
+    String imgUrl;
+
+}

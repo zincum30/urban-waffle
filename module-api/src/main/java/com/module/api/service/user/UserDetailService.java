@@ -24,7 +24,6 @@ public class UserDetailService {
                 .userId(userId)
                 .name(name)
                 .email(email)
-                .phoneNumber(phoneNumber)
                 .joinedDate(LocalDateTime.now())
                 .build();
         return userDetailRepository.save(userDetailEntity).getUserDetailId();
@@ -33,13 +32,17 @@ public class UserDetailService {
 
     // TODO : 재확인 필요
     public Long findUserIdByEmail(String email) {
-        return userDetailRepository.findUserIdByEmail(email).orElseThrow().getUserId();
+        UserDetailEntity userDetailEntity;
+        if(userDetailRepository.existsByEmail(email)) {
+            userDetailEntity = userDetailRepository.getReferenceByEmail(email);
+        } else throw new ApiException(ApiErrorCode.USER_NOT_FOUND);
+        return userDetailEntity.getUserId();
     }
 
 
-
     public void checkDuplicatedEmail(String email) {
-        if (userDetailRepository.findByEmail(email).isPresent()) {
+        boolean isDuplicatedEmail = userDetailRepository.existsByEmail(email);
+        if(isDuplicatedEmail) {
             throw new ApiException(ApiErrorCode.CONFLICT_EMAIL);
         }
     }
@@ -62,5 +65,10 @@ public class UserDetailService {
         return userDetailEntity.getEmail();
     }
 
+    public boolean matchUserDetail(String name, String email) {
+        UserDetailEntity userDetail = userDetailRepository.findUserIdByEmail(email).orElseThrow();
+        return userDetail.getName().equals(name);
+
+    }
 
 }

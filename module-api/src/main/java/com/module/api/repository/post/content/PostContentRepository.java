@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface PostContentRepository extends JpaRepository<PostContentEntity, Long>, PostContentQueryRepository {
 
     Optional<PostContentEntity> findByPostId(Long postId);
+
+    PostContentEntity getByPostId(Long postId);
 }

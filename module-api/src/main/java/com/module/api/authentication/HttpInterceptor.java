@@ -1,7 +1,6 @@
 package com.module.api.authentication;
 
 import com.module.api.annotation.JwtRequired;
-import com.module.api.annotation.Identification;
 import com.module.api.authentication.jwt.JwtProvider;
 import com.querydsl.core.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,7 +40,6 @@ public class HttpInterceptor implements HandlerInterceptor {
                 Authentication authentication = jwtProvider.getAuthentication(jwt);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception ex) {
-                // System.out.println(ex.getLocalizedMessage());
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 return false;
             }

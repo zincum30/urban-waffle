@@ -1,37 +1,35 @@
 ![header](https://capsule-render.vercel.app/api?type=rect&color=timeAuto&section=header&text=Urban-Waffle&height=60&fontSize=40)
 
 
-## 📑 Index
 
-1. [Abstract](#Abstract)
-2. [Tech Stack](#Tech-Stack)
-3. [ERD](#ERD)
-4. [API](#API)
-5. [Project Structure](#Project-Structure)
-
-
----
 
 <br />
 
-## 1. Abstract
+## Overview
 
 <br />
 
 **Quirky, Experimental, Inefficient, and SUPER Personal**
 
 This Spring Boot Starter project includes basic CRUD operations for members, boards, and comments. I aim to improve my skills by exploring unconventional approaches through such endeavors.
-The following are the functionalities or libraries I wanted to implement or use through this project.
+The following are the features I have completed in this project:
 
 + [x] 기능의 모듈화
 + [x] 다중 Database 활용
 + [x] 휴면회원 처리
 + [x] Spring Security 사용
-+ [x] RDB 계층형 데이터 설계
++ [x] QueryDSL 사용
 
+The following are the features I plan to implement in this project:
+
++ [ ] Axon Framework 적용
++ [ ] DDD 및 EDA 활용
++ [ ] gRPC, Web Client 구현
+
+Of course, these may be changed or added to.
 
 I aim to prioritize <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.  
-If you want more information about this project, click <u>[here](https://github.com/zincum30/urban-waffle.wiki.git)</u> 👈
+
 
 
 
@@ -96,15 +94,14 @@ If you want more information about this project, click <u>[here](https://github.
 | Method |             End Point             | Description |  
 |:------:|:---------------------------------:|:-----------:|
 |  POST  |               /join               |    회원가입     |
-|  GET   |        /join?enail={email}        |  이메일 중복 확인  |
+|  GET   |        /join?email={email}        |  이메일 중복 확인  |
 |  POST  |              /login               |     로그인     |
-|  POST  |            /help/email            |   이메일 찾기    |
 |  POST  |          /help/password           |   비밀번호 찾기   |
 |  GET   | /help/certification?email={email} | 본인 인증 메일 발송 |
 |  POST  |        /help/cergification        |  인증 번호 확인   |
-|  GET   |              /{user}              |   프로필 정보    |
-|  GET   |         /{user}?img={img}         | 프로필 이미지 변경  |
-|  PUT   |    /{user}?nickname={nickname}    |   닉네임 변경    |
+|  GET   |            /{nickname}            |   프로필 정보    |
+|  PUT   |         /{nickname}/image         | 프로필 이미지 변경  |
+|  PUT   |            /{nickname}            |   닉네임 변경    |
 |  GET   |    /{user}?nickname={nickname}    |  닉네임 중복 확인  |
 |  POST  |         /{user}/security          |   비밀번호 변경   |
 | DELETE |              /{user}              |     탈퇴      |
@@ -113,9 +110,16 @@ If you want more information about this project, click <u>[here](https://github.
 <details>
 <summary><b>포스트</b> (/api/posts)</summary>
 
-| Method |          End Point          | Description |  
-|:------:|:---------------------------:|:-----------:|
-|        |              /              |             |
+| Method |   End Point   | Description |  
+|:------:|:-------------:|:-----------:|
+|  POST  |    /draft     |   포스트 작성    |
+|  POST  | /{post}/image |   이미지 업로드   |
+|  POST  |    /{post}    |   포스트 저장    |
+|  PUT   |    /{post}    |   포스트 수정    |
+| DELETE | /{post}/image |   이미지 삭제    |
+| DELETE |    /{post}    |   포스트 삭제    |
+|  GET   |               |  전체 포스트 목록  |
+|  GET   |    /{post}    |  포스트 불러오기   |
 
 
 </details>
@@ -123,17 +127,18 @@ If you want more information about this project, click <u>[here](https://github.
 <details>
 <summary><b>댓글</b> (/api/comments)</summary>
 
-| Method |         End Point         | Description |  
-|:------:|:-------------------------:|:-----------:|
-|  POST  |          /{post}          |    댓글 생성    |
-|  PUT   |        /{comment}         |    댓글 수정    |
-| DELETE |        /{comment}         |    댓글 삭제    |
-|  POST  |      {comment}/reply      |   대댓글 작성    |
-|  PUT   | {comment}/reply/{comment} |   대댓글 수정    |
-| DELETE | {comment}/reply/{comment} |   대댓글 삭제    |
-|  GET   |          /{post}          |  전체 댓글 목록   |
-|  GET   |     /{comment}/reply      |  전체 대댓글 목록  |
+| Method |        End Point        | Description |  
+|:------:|:-----------------------:|:-----------:|
+|  POST  |         /{post}         |    댓글 생성    |
+|  PUT   |       /{comment}        |    댓글 수정    |
+| DELETE |       /{comment}        |    댓글 삭제    |
+|  POST  |     {comment}/reply     |   대댓글 작성    |
+|  PUT   | {comment}?reply={reply} |   대댓글 수정    |
+| DELETE | {comment}?reply={reply} |   대댓글 삭제    |
+|  GET   |         /{post}         |  전체 댓글 목록   |
+|  GET   |    /{comment}/reply     |  전체 대댓글 목록  |
 </details>
+
 
 
 <br/>
@@ -143,28 +148,19 @@ If you want more information about this project, click <u>[here](https://github.
 ## 5. Project Structure
 
 
-
-![project-structure](https://github.com/zincum30/urban-waffle/assets/115124708/3071beee-ec83-40a9-9bfe-da8a3a715936)
-
-<details>
-<summary><b>Directory Structure</b> </summary>
-</details>
-
-
 #### Modular Monolith
-In this project, I aimed to decompose independent operations or layers into modules.
 
+I separated Spring Batch jobs that could impact the overall performance of the server system and degrade the quality of services.  
 
-**1) Separation of Features**  
+![project-structure](https://github.com/zincum30/urban-waffle/assets/115124708/c0fb090e-3b17-49c5-ba89-f5274b675d99)
 
-Firstly, I separated Spring Batch jobs that could impact the overall performance of the server system and degrade the quality of services.  
-The module boundaries are clearly defined enough to be completely separate from the existing process.  
+The module boundaries are clearly defined enough to be completely separate from the existing process.
 To address the issue associated with using a single database in modular monoliths, I created separate schemas, which makes it easier to separate the services in the future.
 
 
-**2) Separation of Layers**  
+<br />
 
-Next, I separated the layers into two parts: one handling database access and the other handling user interface.  
+
 
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&&color=timeAuto&section=footer)
