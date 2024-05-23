@@ -1,5 +1,6 @@
 package com.module.api.controller;
 
+import com.module.api.annotation.JwtRequired;
 import com.module.api.dto.request.user.CheckCertificationRequest;
 import com.module.api.dto.request.user.CreateUserDto;
 import com.module.api.dto.request.user.FindUserPasswordDto;
@@ -107,8 +108,9 @@ public class UserController {
         userService.updateNickname(nickname, userId);
     }
 
+    @JwtRequired
     @PostMapping("/{nickname}/security")
-    public void updatePassword(UpdatePassworDto passworDto, Authentication authentication) {
+    public void updatePassword(UpdatePassworDto passworDto) {
         userAuthService.updatePassword(passworDto);
     }
 

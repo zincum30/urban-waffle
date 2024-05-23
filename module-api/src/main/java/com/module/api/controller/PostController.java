@@ -4,7 +4,7 @@ import com.module.api.dto.request.post.CreatePostContentDto;
 import com.module.api.dto.request.post.UpdatePostContentDto;
 import com.module.api.dto.response.FetchPostContentResponse;
 import com.module.api.dto.response.FetchPostListResponse;
-import com.module.api.service.AwsS3Service;
+
 import com.module.api.service.facade.UpdatePostContentFacade;
 import com.module.api.service.post.PostContentService;
 import com.module.api.service.post.PostImageService;
@@ -38,7 +38,7 @@ public class PostController {
     private final PostMetaService postMetaService;
     private final PostImageService postImageService;
     private final PostContentService postContentService;
-    private final AwsS3Service awsS3Service;
+
     private final UpdatePostContentFacade updatePostContentFacade;
 
 
@@ -49,10 +49,10 @@ public class PostController {
         return ResponseEntity.ok(postId);
     }
 
-    @PostMapping("/{post-id}/image")
-    public void addTempPostImage(@RequestParam(value = "image") MultipartFile image) throws IOException {
-        awsS3Service.upload(image);
-    }
+//    @PostMapping("/{post-id}/image")
+//    public void addTempPostImage(@RequestParam(value = "image") MultipartFile image) throws IOException {
+//        awsS3Service.upload(image);
+//    }
 
 
     @PostMapping("/{post-id}")
