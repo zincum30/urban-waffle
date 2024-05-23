@@ -7,7 +7,10 @@ import com.module.api.exception.api.ApiErrorCode;
 import com.module.api.exception.api.ApiException;
 import com.module.api.repository.user.UserAuthRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +21,8 @@ import java.time.LocalDateTime;
 public class UserAuthService {
 
     private final UserAuthRepository userAuthRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
 
     @Transactional

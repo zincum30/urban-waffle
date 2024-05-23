@@ -1,20 +1,11 @@
 ![header](https://capsule-render.vercel.app/api?type=rect&color=timeAuto&section=header&text=Urban-Waffle&height=60&fontSize=40)
 
 
-## 📑 Index
 
-1. [Overview](#Overview)
-2. [Tech Stack](#Tech-Stack)
-3. [ERD](#ERD)
-4. [API](#API)
-5. [Project Structure](#Project-Structure)
-
-
----
 
 <br />
 
-## 1. Overview
+## Overview
 
 <br />
 

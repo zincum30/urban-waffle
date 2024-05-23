@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,7 +43,7 @@ public class CommentController {
 
 
     @Operation(summary = "댓글 수정")
-    @PutMapping("/{comment-id}")
+    @PatchMapping("/{comment-id}")
     public void updateComment(@PathVariable(name = "comment-id") Long commentId, Authentication authentication, String detail) {
         Long userId = (Long) authentication.getPrincipal();
         commentService.updateComment(commentId, userId, detail);
@@ -70,7 +71,7 @@ public class CommentController {
     }
 
     @Operation(summary = "대댓글 수정")
-    @PutMapping("{comment-id}/reply/{reply-id}")
+    @PatchMapping("{comment-id}/reply/{reply-id}")
     public void editReply(@PathVariable(name = "comment-id")Long commentId, @PathVariable(name = "reply-id")Long replyId) {
 
     }

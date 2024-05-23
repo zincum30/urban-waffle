@@ -11,6 +11,7 @@ import com.module.api.service.user.UserDetailService;
 import com.module.api.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +20,7 @@ public class LoginFacade {
     private final UserService userService;
     private final UserDetailService userDetailService;
     private final UserAuthService userAuthService;
-    private final SendEmailService sendEmailService;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
 
