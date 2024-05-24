@@ -27,6 +27,7 @@ The following are the features I plan to implement in this project:
 Of course, these may be changed or added to.
 
 I aim to prioritize <code>scalability</code>, <code>efficiency</code>, and <code>readability</code> even without comments.  
+If you need more information, click [here](https://github.com/zincum30/urban-waffle/wiki/Urban%E2%80%90Waffle).
 
 
 
